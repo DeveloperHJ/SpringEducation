@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -45,20 +46,48 @@ public class MemberDAOimplJDBC implements MemberDAO {
 
 	@Override
 	public MemberVO getMember(String id) {
-		return null;
+		MemberVO memberVO = new MemberVO();
+		StringBuffer str = new StringBuffer();
+		str.append("select * from member where id = ?");
+		
+		System.out.println("getMember");
+		
+		//query는 List타입이라 queryForObject 사용
+		memberVO = (MemberVO)this.jdbcTemplate.queryForObject(str.toString(), new Object[] { id },
+								new BeanPropertyRowMapper<>(MemberVO.class));
+		
+		System.out.println(memberVO.toString());
+		
+		return memberVO;
 	}
 
 	@Override
 	public ArrayList<MemberVO> getMemberList() {
-		return null;
+		System.out.println("list 호출");
+		ArrayList<MemberVO> alist = new ArrayList<>();
+		StringBuffer str = new StringBuffer();
+		str.append("select * from member");
+		
+		alist = (ArrayList<MemberVO>)this.jdbcTemplate.query(str.toString(), 
+							new BeanPropertyRowMapper<MemberVO>(MemberVO.class));
+		
+		return alist;
 	}
 
 	@Override
-	public void update(String id) {
+	public void update(MemberVO memberVO) {
+		StringBuffer str = new StringBuffer();
+		str.append("update member set passwd = ?, name = ?, birth = ?, phone = ?, gender = ? ")
+			 .append("where id = ?");
+		
+		this.jdbcTemplate.update(str.toString(), 
+				memberVO.getPasswd(), memberVO.getName(), memberVO.getBirth(), 
+				memberVO.getPhone(), memberVO.getGender(), memberVO.getId());
 	}
 
 	@Override
 	public void delete(String id) {
+		this.jdbcTemplate.update("delete from member where id = ?", id);
 	}
 
 }

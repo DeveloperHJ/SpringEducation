@@ -203,6 +203,25 @@
 		</dependency>	
 		<!-- mybatis 연동 설정 끝 -->
 		
+		<!-- JPA(Java Persitence API) validation -->
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-core</artifactId>
+		    <version>5.3.0.Final</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-entitymanager</artifactId>
+		    <version>5.3.0.Final</version>
+		</dependency>
+				
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-validator</artifactId>
+		    <version>6.0.10.Final</version>
+		</dependency>
+						
 	</dependencies>
     <build>
         <plugins>

@@ -31,7 +31,7 @@ ${mdto.getBirth()}
 ${mdto.getPhone()}
 
 <%
-MemberDAO mdao = MemberDAO.getInstance();
+	MemberService mdao = MemberService.getInstance();
 SqlResult sqlResult = mdao.checkId(mdto.getId());
 %>
 

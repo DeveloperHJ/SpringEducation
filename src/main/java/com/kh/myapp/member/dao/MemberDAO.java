@@ -20,7 +20,7 @@ public interface MemberDAO
 	public ArrayList<MemberVO> getMemberList();
 
 	//회원정보 수정
-	public void update(String id);
+	public void update(MemberVO memberVO);
 	
 	//회원정보 삭제
 	public void delete(String id);
