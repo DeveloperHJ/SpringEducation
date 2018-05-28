@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -50,20 +51,20 @@ public class MemberDAOimplJDBC implements MemberDAO {
 		StringBuffer str = new StringBuffer();
 		str.append("select * from member where id = ?");
 		
-		System.out.println("getMember");
-		
 		//query는 List타입이라 queryForObject 사용
-		memberVO = (MemberVO)this.jdbcTemplate.queryForObject(str.toString(), new Object[] { id },
-								new BeanPropertyRowMapper<>(MemberVO.class));
-		
-		System.out.println(memberVO.toString());
+		//queryForObject의 쿼리 결과값이 0일 때 error 발생하므로 try-catch로 묶어줌.
+		try {
+			memberVO = (MemberVO)this.jdbcTemplate.queryForObject(str.toString(), new Object[] { id },
+									new BeanPropertyRowMapper<>(MemberVO.class));
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
 		
 		return memberVO;
 	}
 
 	@Override
 	public ArrayList<MemberVO> getMemberList() {
-		System.out.println("list 호출");
 		ArrayList<MemberVO> alist = new ArrayList<>();
 		StringBuffer str = new StringBuffer();
 		str.append("select * from member");

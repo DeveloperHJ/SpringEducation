@@ -21,22 +21,15 @@ $(function(){
 		}
 	});
 	
-	$("#joinBtn").on("click",function(e){
+	$("#modifyBtn").on("click",function(e){
 		e.preventDefault();
 		
 		$("form").submit();
 	});
-	
-	$("#joinClearBtn").on("click",function(e){
+		
+	$("#modifyNoBtn").on("click",function(e){
 		e.preventDefault();		
-		  $("form").each(function(){
-			    this.reset();
-		 });
-	});	
-	
-	$("#joinCancelBtn").on("click",function(e){
-		e.preventDefault();		
-			location.href="/member/memberList";
+			location.href="/";
 	});		
 });
 </script>
@@ -46,12 +39,12 @@ $(function(){
 <title>Insert title here</title>
 </head>
 <body>
-<form:form modelAttribute="memberVO" action="/member/memberJoinOK" method="post">
+<form:form modelAttribute="memberVO" action="/member/memberModifyOK" method="post">
 <table>
 	<tr>
 		<th>아이디</th>
 		<td>
-		<form:input path="id" type="text" />
+		<form:input path="id" type="text" readonly="true" />
 		<form:errors path="id" type="text" cssClass="errmsg" />
 		<!-- memberVO에서 지정해준 유효성 검사 에러 이렇게 뜸 -->
 		</td>
@@ -101,9 +94,8 @@ $(function(){
 	</tr>
 	<tr>
 		<td colspan=2>
-			<button id="joinBtn">가입</button>
-			<button id="joinClearBtn">초기화</button>
-			<button id="joinCancelBtn">가입취소</button>
+			<button id="modifyBtn">수정</button>
+			<button id="modifyNoBtn">취소</button>
 	</tr>	
 </table>
 </form:form>

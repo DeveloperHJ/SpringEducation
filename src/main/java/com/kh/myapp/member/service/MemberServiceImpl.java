@@ -11,6 +11,7 @@ import com.kh.myapp.member.vo.MemberVO;
 @Service
 public class MemberServiceImpl implements MemberService {
 	
+	@Autowired
 	MemberDAO memberDAO;
 
 	@Override

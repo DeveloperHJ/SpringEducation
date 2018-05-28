@@ -29,7 +29,7 @@ public class MemberVO {
 	@Size(min=4, max=30, message="비밀번호는 4~30자리로 입력해주세요.")
 	private String passwd;	//비밀번호
 	
-	@Size(min=4, max=20, message="이름은 4~20자리로 입력해주세요.")
+	@Size(min=2, max=20, message="이름은 4~20자리로 입력해주세요.")
 	private String name;		//이름
 	
 	@NotNull
