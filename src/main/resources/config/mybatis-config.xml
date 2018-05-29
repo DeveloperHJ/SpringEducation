@@ -7,4 +7,9 @@
   <settings>
     <setting name="logImpl" value="SLF4J"/>
   </settings>
+  
+  <!-- 얼라이어스 타입 -->
+  <typeAliases>
+  	<typeAlias alias="MemberVO" type="com.kh.myapp.member.vo.MemberVO" />
+  </typeAliases>
 </configuration>

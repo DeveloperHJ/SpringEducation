@@ -23,9 +23,9 @@ CDATE	DATE	No	SYSDATE 	7	생성일
 UDATE	DATE	No	SYSDATE 	8	수정일
 */
 
-// 스프링에서 제공되는 JDBC
-@Repository("memberDAO")
-public class MemberDAOimplJDBC implements MemberDAO {
+// 스프링에서 제공되는 JDBC, 구현한 클래스가 2개이기 때문에 이름 지정
+@Repository
+public class MemberDAOImplJDBC implements MemberDAO {
 
 	private JdbcTemplate jdbcTemplate;
 	

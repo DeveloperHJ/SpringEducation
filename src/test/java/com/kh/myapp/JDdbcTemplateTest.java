@@ -1,6 +1,7 @@
 package com.kh.myapp;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -30,7 +31,7 @@ public class JDdbcTemplateTest {
 	private DataSource dataSource;
 	
 	@Autowired	// impl로 생성해줄 필요 없이 DAO 호출해줄 수 있도록 어노테이션 
-	@Qualifier("memberDAO")	// 같은 타입이 여러개일 경우 오류가 뜨기 때문에 이 id를 가진 것을 가져온다.
+	@Qualifier("memberServiceImpl")	// 같은 타입이 여러개일 경우 오류가 뜨기 때문에 이 id를 가진 것을 가져온다.
 	private MemberDAO memberDAO;	
 	
 	//회원등록
@@ -62,14 +63,14 @@ public class JDdbcTemplateTest {
 	@Test
 	public void list() 
 	{
-		ArrayList<MemberVO> alist = memberDAO.getMemberList();
+		List<MemberVO> alist = memberDAO.getMemberList();
 		logger.info(alist.toString());
 	}
 	
 	@Test 
 	public void getMember() 
 	{
-		MemberVO memverVO = memberDAO.getMember("SPRING");
+		MemberVO memverVO = memberDAO.getMember("admin@kh.com");
 		logger.info(memverVO.toString());
 	}
 	

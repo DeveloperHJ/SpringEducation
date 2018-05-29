@@ -1,30 +1,35 @@
 package com.kh.myapp.controller;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.kh.myapp.member.service.MemberService;
 import com.kh.myapp.member.vo.MemberVO;
 
-@Controller
+@Controller  
 @RequestMapping(value="/member")
+@SessionAttributes("memberVO")
 public class MemberController {
 	
 	// 로그 찍어볼 수 있는 인스턴스 .info로 출력됨. 
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired
+//	@Qualifier("memberServiceImpl")
+	@Qualifier("memberServiceImplXML")
 	MemberService memberService;
 	
 	// 가입화면
@@ -86,7 +91,7 @@ public class MemberController {
 	@RequestMapping(value="/memberList")
 	public String memberList(Model model)
 	{
-		ArrayList<MemberVO> alist = memberService.getMemberAll();
+		List<MemberVO> alist = memberService.getMemberAll();
 		model.addAttribute("memberVOS", alist);
 		return "/member/memberList";
 	}

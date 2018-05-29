@@ -3,10 +3,12 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-<mapper namespace="com.kh.myapp.member.dao.MemberMapperDAO">
+<!-- 인터페이스 이름 작성 -->
+<mapper namespace="com.kh.myapp.member.dao.MemberDAO">
 
 	<!-- 레코드 하나 가져오는 거라 속성(parameterType) 하나 추가 --> 
-	<select id = "getByMemberID" resultType="com.kh.myapp.member.vo.MemberVO"
+	<!-- SQL 쿼리문, 메서드명, 리턴타입, 파라미터 타입 등 -->
+	<select id = "getByMemberID" resultType="MemberVO"
 			parameterType="String">
 		select * from member where id = #{id} 
 	</select>

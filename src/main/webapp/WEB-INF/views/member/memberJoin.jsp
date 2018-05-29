@@ -51,16 +51,16 @@ $(function(){
 	<tr>
 		<th>아이디</th>
 		<td>
-		<form:input path="id" type="text" />
-		<form:errors path="id" type="text" cssClass="errmsg" />
+		<form:input path="id" />
+		<form:errors path="id" cssClass="errmsg" />
 		<!-- memberVO에서 지정해준 유효성 검사 에러 이렇게 뜸 -->
 		</td>
 	</tr>
 	<tr>
 		<th>비밀번호</th>
 		<td>
-		<form:input path="passwd" type="text" />
-		<form:errors path="passwd" type="text" cssClass="errmsg" />
+		<form:input path="passwd" />
+		<form:errors path="passwd" cssClass="errmsg" />
 		</td>
 	</tr>
 	<tr>

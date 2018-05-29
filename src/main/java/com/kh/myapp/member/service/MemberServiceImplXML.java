@@ -9,11 +9,12 @@ import org.springframework.stereotype.Service;
 import com.kh.myapp.member.dao.MemberDAO;
 import com.kh.myapp.member.vo.MemberVO;
 
+// 서비스 메서드를 Controller에서 사용 
 @Service
-public class MemberServiceImpl implements MemberService {
+public class MemberServiceImplXML implements MemberService {
 	
 	@Autowired
-	@Qualifier("memberDAOImplJDBC")
+	@Qualifier("memberDAOImplXML")
 	MemberDAO memberDAO;
 
 	@Override
