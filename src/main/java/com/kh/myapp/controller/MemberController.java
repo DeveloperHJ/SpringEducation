@@ -14,14 +14,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.kh.myapp.member.service.MemberService;
 import com.kh.myapp.member.vo.MemberVO;
 
 @Controller  
 @RequestMapping(value="/member")
-@SessionAttributes("memberVO")
 public class MemberController {
 	
 	// 로그 찍어볼 수 있는 인스턴스 .info로 출력됨. 
@@ -53,7 +51,7 @@ public class MemberController {
 		} else {
 			memberService.memberInsert(memberVO);
 		}	
-		return "/member/memberList";
+		return "redirect:/member/memberList";
 	}
 	
 	//멤버 수정 화면
@@ -61,7 +59,7 @@ public class MemberController {
 	public String memberModify(@PathVariable String id, Model model) 
 	{
 		model.addAttribute("memberVO", memberService.getByMemberID(id));
-		return "/member/memberList";
+		return "/member/memberModify";
 	}
 	
 	//멤버 수정 처리 
@@ -72,7 +70,7 @@ public class MemberController {
 			return "/member/memberModify";
 		} else {
 			memberService.memberUpdate(memberVO);
-			return "/member/memberList";
+			return "redirect:/member/memberList";
 		}	
 	}
 	
@@ -85,7 +83,7 @@ public class MemberController {
 		} else {
 			
 		}
-		return "/member/memberList";
+		return "redirect:/member/memberList";
 	}
 	
 	@RequestMapping(value="/memberList")

@@ -12,9 +12,9 @@
 	<!-- 데이터소스 Bean 등록 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" 	value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url"				value="jdbc:oracle:thin:@Localhost:1521:xe"/>
-		<property name="username" 			value="spring"/>
-		<property name="password" 			value="spring1234"/>
+		<property name="url"				value="jdbc:oracle:thin:@Localhost:1521:xe" />
+		<property name="username" 			value="spring" />
+		<property name="password" 			value="spring1234" />
 	</bean>
 	
 	<!-- ref(데이터소스 참조), mybatis에서 중요한 역할, 얘를 통해서 데이터소스에 접근 -->
@@ -27,6 +27,11 @@
 	<!-- ref:sqlSessionFactiory 참조 -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<!-- jdbcTemplate의 생성자 참조(datasource) -->
+		<constructor-arg ref="dataSource" />
 	</bean>
 	
 	<!-- 서비스를 찾아서 빈에 등록. com.kh.myapp 패키지 안에 어노테이션 찾아서 빈으로 등록. -->

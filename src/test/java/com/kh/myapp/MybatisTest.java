@@ -6,11 +6,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.kh.myapp.login.dao.LoginDAO;
+import com.kh.myapp.login.service.LoginService;
 import com.kh.myapp.member.service.MemberService;
 import com.kh.myapp.member.vo.MemberVO;
+
+import jdk.nashorn.internal.ir.annotations.Ignore;
 
 
 //테스트 환경
@@ -28,5 +33,31 @@ class MybatisTest {
 	void test() {
 		MemberVO memberVO = xml.getByMemberID("admin@kh.com");
 		logger.info(memberVO.toString());
+	}
+	
+	@Autowired
+	@Qualifier("loginServiceImplXML")
+	LoginService loginService;	
+	
+	@Test @Ignore
+	public void getMember() 
+	{
+		MemberVO memberVO = new MemberVO();
+		memberVO.setId("admin2@kh.com");
+		memberVO.setPasswd("1234");
+		
+		logger.info(loginService.getMember(memberVO).toString());
+	}
+
+	// 빈 등록정보 출력
+	@Autowired
+	DefaultListableBeanFactory df;
+	
+	@Test
+	public void beans() 
+	{
+		for (String name : df.getBeanDefinitionNames()) {
+			logger.info(name + "\t" + df.getBean(name).getClass().getName());
+		}
 	}
 }

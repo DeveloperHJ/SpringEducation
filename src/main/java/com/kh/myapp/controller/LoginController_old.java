@@ -17,12 +17,12 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.kh.myapp.login.service.LoginService;
 import com.kh.myapp.member.vo.MemberVO;
 
-@Controller
+//@Controller
 @RequestMapping("/login")	// 클러스 내부에서 공통적으로 사용되는 Mapping
 @SessionAttributes("user")
-public class LoginController {
+public class LoginController_old {
 	
-	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+	private static final Logger logger = LoggerFactory.getLogger(LoginController_old.class);
 	
 	@Autowired
 	@Qualifier("loginServiceImplJDBC")

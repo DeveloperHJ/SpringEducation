@@ -52,13 +52,8 @@ public class MemberDAOImplJDBC implements MemberDAO {
 		str.append("select * from member where id = ?");
 		
 		//query는 List타입이라 queryForObject 사용
-		//queryForObject의 쿼리 결과값이 0일 때 error 발생하므로 try-catch로 묶어줌.
-		try {
 			memberVO = (MemberVO)this.jdbcTemplate.queryForObject(str.toString(), new Object[] { id },
 									new BeanPropertyRowMapper<>(MemberVO.class));
-		} catch (DataAccessException e) {
-			e.printStackTrace();
-		}
 		
 		return memberVO;
 	}
