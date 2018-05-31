@@ -6,7 +6,7 @@
 <!-- 인터페이스 이름 작성 -->
 <mapper namespace="com.kh.myapp.login.dao.LoginDAO">
 
-	<select id = "getByMemID" resultType="MemberVO" parameterType="MemberVO">
+	<select id = "getByMemID" resultType="MemberVO" parameterType="com.kh.myapp.login.vo.LoginVO">
 		select * from member where id = #{id} and passwd = #{passwd}
 	</select>
 </mapper>

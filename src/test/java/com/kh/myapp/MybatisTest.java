@@ -12,6 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.kh.myapp.login.dao.LoginDAO;
 import com.kh.myapp.login.service.LoginService;
+import com.kh.myapp.login.vo.LoginVO;
 import com.kh.myapp.member.service.MemberService;
 import com.kh.myapp.member.vo.MemberVO;
 
@@ -20,7 +21,7 @@ import jdk.nashorn.internal.ir.annotations.Ignore;
 
 //테스트 환경
 //@RunWith(SpringJUnit4ClassRunner.class) // JUnit 4버전 사용
-@ExtendWith(SpringExtension.class) // JUnit 5버전 사용
+@ExtendWith(SpringExtension.class) // JUnit 5버전 사용(Spring환경에서 테스트하겠다)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml"})
 class MybatisTest {
 	private static final Logger logger = LoggerFactory.getLogger(MybatisTest.class);
@@ -42,11 +43,11 @@ class MybatisTest {
 	@Test @Ignore
 	public void getMember() 
 	{
-		MemberVO memberVO = new MemberVO();
-		memberVO.setId("admin2@kh.com");
-		memberVO.setPasswd("1234");
+		LoginVO loginVO = new LoginVO();
+		loginVO.setId("admin2@kh.com");
+		loginVO.setPasswd("1234");
 		
-		logger.info(loginService.getMember(memberVO).toString());
+		logger.info(loginService.getMember(loginVO).toString());
 	}
 
 	// 빈 등록정보 출력

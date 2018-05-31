@@ -24,7 +24,7 @@ html, body {margin:0; padding:0; height:100%}
 <header id="header"></header>
 <nav id="nav"></nav>
 <section id="content">
-${user.id}님 환영합니다. <br>
+${login.id}님 환영합니다. <br>
 <a href="/login/loginIn">로그인</a><br>
 <a href="/login/logOut">로그아웃</a><br>
 <a href="/member/memberJoin">회원가입</a>

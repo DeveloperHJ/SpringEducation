@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.kh.myapp.login.dao.LoginDAO;
+import com.kh.myapp.login.vo.LoginVO;
 import com.kh.myapp.member.vo.MemberVO;
 
 @Service
@@ -15,8 +16,8 @@ public class LoginServiceImplJDBC implements LoginService {
 	LoginDAO loginDAO;
 
 	@Override
-	public MemberVO getMember(MemberVO memberVO) {
-		return loginDAO.getMember(memberVO);
+	public MemberVO getMember(LoginVO loginVO) {
+		return loginDAO.getMember(loginVO);
 	}
 
 }

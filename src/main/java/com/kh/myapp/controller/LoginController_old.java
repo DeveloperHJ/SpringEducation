@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.kh.myapp.login.service.LoginService;
+import com.kh.myapp.login.vo.LoginVO;
 import com.kh.myapp.member.vo.MemberVO;
 
 //@Controller
@@ -40,7 +41,7 @@ public class LoginController_old {
 	}
 	
 	@RequestMapping("/memLoginOK")
-	public String memLoginOK(@Valid @ModelAttribute("user") MemberVO user, BindingResult result, Model model) 
+	public String memLoginOK(@Valid @ModelAttribute("user") LoginVO login, BindingResult result, Model model) 
 	{
 		// 오류가 있을 경우 
 		if(result.hasErrors()) {	
