@@ -86,4 +86,28 @@ public class MemberDAOImplJDBC implements MemberDAO {
 		this.jdbcTemplate.update("delete from member where id = ?", id);
 	}
 
+	@Override
+	public String findID(String name, String birth, String phone) {
+		String id = null;
+		StringBuffer str = new StringBuffer();
+		str.append("select id from member ")
+			 .append("where name = ? and birth = ? and phone = ?");
+		
+		id = this.jdbcTemplate.queryForObject(str.toString(), 
+				new Object[] {name, birth, phone}, String.class);
+		return id;
+	}
+
+	@Override
+	public String findPswd(String id, String birth, String phone) {
+		String passwd = null;
+		StringBuffer str = new StringBuffer();
+		str.append("select passwd from member ")
+			 .append("where name = ? and birth = ? and phone = ?");
+		
+		passwd = this.jdbcTemplate.queryForObject(str.toString(), 
+				new Object[] {id, birth, phone}, String.class);
+		return passwd;
+	}
+
 }

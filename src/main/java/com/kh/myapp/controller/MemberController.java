@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.myapp.member.service.MemberService;
 import com.kh.myapp.member.vo.MemberVO;
@@ -51,7 +52,7 @@ public class MemberController {
 		} else {
 			memberService.memberInsert(memberVO);
 		}	
-		return "redirect:/member/memberList";
+		return "redirect:/";
 	}
 	
 	//멤버 수정 화면
@@ -70,7 +71,7 @@ public class MemberController {
 			return "/member/memberModify";
 		} else {
 			memberService.memberUpdate(memberVO);
-			return "redirect:/member/memberList";
+			return "/";
 		}	
 	}
 	
@@ -83,9 +84,10 @@ public class MemberController {
 		} else {
 			
 		}
-		return "redirect:/member/memberList";
+		return "redirect:/";
 	}
 	
+	//멤버리스트
 	@RequestMapping(value="/memberList")
 	public String memberList(Model model)
 	{
@@ -94,10 +96,33 @@ public class MemberController {
 		return "/member/memberList";
 	}
 	
+	//로그인 했을 경우
 	@RequestMapping(value="/memberLogin", method=RequestMethod.POST)
 	public String memLogin() 
 	{
 		return "/member/memberList";
+	}
+	
+	//멤버 아이디/비밀번호 찾기 페이지로 이동 
+	@RequestMapping(value="/memberFind")
+	public void memberFind(Model model) {	}
+	
+	//아이디 찾기
+	@RequestMapping(value = "/memberFindID")
+	public String findIdOK(@RequestParam("name") String name, @RequestParam("birth") String birth, 
+		 										@RequestParam("phone") String phone, Model model) 
+	{
+	 model.addAttribute("id", memberService.findID(name, birth, phone));
+	 return "/member/memberFindOK";
+	}
+		 
+	//비밀번호 찾기
+	@RequestMapping(value = "/memberFindPawd")
+	public String findPasswdOK(@RequestParam("id") String id, @RequestParam("birth") String birth, 
+		 										@RequestParam("phone") String phone, Model model) 
+	{
+	 model.addAttribute("passwd", memberService.findPswd(id, birth, phone));
+	 return "/member/memberFindOK";
 	}
 	
 }

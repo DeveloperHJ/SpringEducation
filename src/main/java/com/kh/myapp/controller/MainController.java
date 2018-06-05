@@ -11,4 +11,16 @@ public class MainController {
 		
 		return "index";
 	}
+	
+	@RequestMapping("/edu") 
+	public String mainEdu() {
+		
+		return "index_edu";
+	}
+	
+	@RequestMapping(value="/main") 
+	public String mainContent() {
+		
+		return "index/indexContent";
+	}
 }

@@ -18,7 +18,8 @@
 	</select>
 	
 	<insert id = "memberInsert" parameterType="com.kh.myapp.member.vo.MemberVO">
-		insert into member values (#{id}, #{passwd}, #{name}, #{birth}, ${phone}, #{gender})
+		insert into member(id, passwd, name, birth, phone, gender) 
+		values (#{id}, #{passwd}, #{name}, #{birth}, ${phone}, #{gender})
 	</insert>
 	
 	<delete id="memberDelete" parameterType="String">
@@ -31,4 +32,13 @@
 		where id = #{id}
 	</update>
 
+	<select id = "findID" resultType="String">
+		select id from member 
+		where name = #{name} and birth = #{birth2} and phone = #{phone2}
+	</select>
+	
+	<select id = "findPswd" resultType="String">
+		select passwd from member 
+		where id = #{id} and birth = #{birth} and phone = #{phone}
+	</select>
 </mapper>

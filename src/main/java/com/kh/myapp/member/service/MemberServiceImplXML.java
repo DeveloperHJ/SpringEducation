@@ -42,4 +42,14 @@ public class MemberServiceImplXML implements MemberService {
 		memberDAO.delete(id);
 	}
 
+	@Override
+	public String findID(String name, String birth, String phone) {
+		return memberDAO.findID(name, birth, phone);
+	}
+
+	@Override
+	public String findPswd(String id, String birth, String phone) {
+		return memberDAO.findPswd(id, birth, phone);
+	}
+
 }

@@ -38,15 +38,15 @@ public class LoginController {
 															// 요청경로와 받는 페이지는 같지 않아도 됨.
 	public String logIn(Model model, HttpSession session)
 	{
-/*		if(session.getAttribute("login") != null) {
+		if(session.getAttribute("login") != null) {
 			return "redirect:/";
-		}*/
+		}
+		
 		/**
 		 * Session에 LoginVO 객체를 생성하여 등록 
 		 * VO객체의 필드와 메서드가 View단에서의 form path가 같아야 바인딩 된다. 
 		 */
-		model.addAttribute("login", new LoginVO());	 
-																								
+		model.addAttribute("login", new LoginVO());
 		return "login/login";
 	}
 	

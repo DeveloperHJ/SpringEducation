@@ -4,11 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/webjars/bootstrap/4.1.0/css/bootstrap.css">
-<script src="/webjars/jquery/3.3.1/dist/jquery.js"></script>
-<script src="/webjars/bootstrap/4.1.0/js/bootstrap.js"></script>	
+<jsp:include page="../header.jsp" flush="true"></jsp:include>
+
 <title>회원목록</title>
 <script>
 $(function() {
@@ -19,38 +16,31 @@ $(function() {
 </script>
 </head>
 <body>
+<jsp:include page="../navbar.jsp" flush="true"></jsp:include>
+<div class="container" style="margin-top: 3%;">
 회원목록
-<table border=1 cellpadding=0 cellspacing=0>
-	<tr>
-		<th>#</th>
-		<th>아이디</th>
-		<th>이름</th>
-		<th>생년월일</th>
-		<th>전화번호</th>
-		<th>성별</th>
-		<th>수정</th>
-		<th>삭제</th>
-	</tr>
-	<C:forEach items="${memberVOS}" var="memberVO">
-	<tr>
-		<td>#</td>
-		<td>${memberVO.id }</td>
-		<td>${memberVO.name }</td>
-		<td>${memberVO.birth }</td>
-		<td>${memberVO.phone }</td>
-		<td>
-			<C:if test="${memberVO.gender eq 'W'}"> 여자 </C:if>
-			<C:if test="${memberVO.gender eq 'M'}"> 남자 </C:if>
-		</td>
-		<td><button id="modi" data-url="/member/memberModify/${memberVO.id}">수정</button></td>
-		<td><button id="del" data-url="/member/memberDelete/${memberVO.id}">삭제</button></td>
-	</tr>
-	</C:forEach>
-	<tr>
-		<td colspan="8" align="center">
-			<button id="list" data-url="/member/memberJoin">회원가입</button>
-		</td>
-	</tr>
-</table>
+<ul class="collapsible">
+<C:forEach items="${memberVOS}" var="memberVO">
+  <li>
+    <div class="collapsible-header">
+    	<i class="material-icons" style="position: relative;">filter_drama</i>${memberVO.id}
+    	&emsp;&emsp;
+ 		<a href=# id="modi" data-url="/member/memberModify/${memberVO.id}">수정</a>
+		<a href=# id="del" data-url="/member/memberDelete/${memberVO.id}">삭제</a>
+	</div>
+    <div class="collapsible-body">
+    	<span>
+			이름: ${memberVO.name } <br>
+			생년월일: ${memberVO.birth } <br>
+			전화번호: ${memberVO.phone } <br>
+			성별: 
+			<C:if test="${memberVO.gender eq 'W'}">여자</C:if>
+			<C:if test="${memberVO.gender eq 'M'}">남자</C:if> 
+    	</span>
+   	</div>
+  </li>
+</C:forEach>
+</ul>
+</div>
 </body>
 </html>

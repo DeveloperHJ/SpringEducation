@@ -4,15 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/webjars/bootstrap/4.1.0/css/bootstrap.css">
-<link rel="stylesheet" href="/webjars/font-awesome/5.0.13/web-fonts-with-css/css/fontawesome-all.css" />
-<script src="/webjars/jquery/3.3.1/dist/jquery.js"></script>
-<script src="/webjars/bootstrap/4.1.0/js/bootstrap.js"></script>
+
+<jsp:include page="../header.jsp" flush="true"></jsp:include>
+
 <title>Insert title here</title>
 <!-- 유효성 검사를 위한 jquery -->
-<script src="/webjars/public/jquery/jquery-3.3.1.js"></script>
+
 <script>
 $(function() {		
 	$("#joinBtn").on("click",function(e){
@@ -45,6 +42,8 @@ $(function() {
 </script>
 </head>
 <body>
+<jsp:include page="../navbar.jsp" flush="true"></jsp:include>
+<div class="container">
 <hr />
 <h2>로그인</h2>
 <hr />
@@ -80,6 +79,7 @@ $(function() {
   <i class="fas fa-sync fa-spin"></i>
   <i class="fas fa-cog fa-spin"></i>
   <i class="fas fa-spinner fa-pulse"></i>
+</div>
 </div>
 </body>
 </html>

@@ -4,11 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/webjars/bootstrap/4.1.0/css/bootstrap.css">
-<script src="/webjars/jquery/3.3.1/dist/jquery.js"></script>
-<script src="/webjars/bootstrap/4.1.0/js/bootstrap.js"></script>
+<jsp:include page="../header.jsp" />
+
 <script>
 $(function(){
 	$("input[name=password]").keyup(function(e) {
@@ -39,65 +36,96 @@ $(function(){
 <title>Insert title here</title>
 </head>
 <body>
-<form:form modelAttribute="memberVO" action="/member/memberModifyOK" method="post">
-<table>
-	<tr>
-		<th>아이디</th>
-		<td>
-		<form:input path="id" type="text" readonly="true" />
-		<form:errors path="id" type="text" cssClass="errmsg" />
-		<!-- memberVO에서 지정해준 유효성 검사 에러 이렇게 뜸 -->
-		</td>
-	</tr>
-	<tr>
-		<th>비밀번호</th>
-		<td>
-		<form:input path="passwd" type="text" />
-		<form:errors path="passwd" type="text" cssClass="errmsg" />
-		</td>
-	</tr>
-	<tr>
-		<th>비밀번호확인</th>
-		<td>
-		<input type="password" name="password" />
-		<span id="passwordErr" class="errmsg"></span>
-		</td>
-	</tr>
-	<tr>
-		<th>이름</th>
-		<td>
-		<form:input path="name" type="text" />
-		<form:errors path="name" type="text" cssClass="errmsg" />
-		</td>
-	</tr>
-	<tr>
-		<th>생일</th>
-		<td>
-		<form:input path="birth" type="text" />
-		<form:errors path="birth" type="text" cssClass="errmsg" />
-		</td>
-	</tr>
-	<tr>
-		<th>전화번호</th> 
-		<td>
-		<form:input path="phone" type="text" />
-		<form:errors path="phone" type="text" cssClass="errmsg" />
-		</td>
-	</tr>
-	<tr>
-		<th>성별</th>
-		<td>
-		여<form:radiobutton path="gender" value="W" />
-		남<form:radiobutton path="gender" value="M" />
-		<form:errors path="gender" cssClass="errmsg" />
-		</td>
-	</tr>
-	<tr>
-		<td colspan=2>
-			<button id="modifyBtn">수정</button>
-			<button id="modifyNoBtn">취소</button>
-	</tr>	
-</table>
-</form:form>
+<jsp:include page="../navbar.jsp" />
+
+<section>
+ <div class="section container" style="margin-top: 3%;">
+  <div class="row">
+    <div class="col s12 m6 offset-m3">
+      <div class="card login-wrapper">
+        <div class="card-content">
+
+		<form:form modelAttribute="memberVO" action="/member/memberModifyOK" method="post">
+            <h4 class="center">Account Information</h4>
+
+            <div class="input-field">
+              <label for="id">
+                Email
+              </label>
+              	<form:input path="id" readonly="true" />
+				<form:errors path="id" cssClass="errmsg" />	
+            </div>
+            
+            <div class="input-field">
+              <label for="name" class="">
+                Name
+              </label>
+              	<form:input path="name" />
+				<form:errors path="name" cssClass="errmsg" />
+            </div>
+
+            <div class="input-field">
+              <label for="passwd">
+                Password
+              </label>
+				<form:password path="passwd" />
+				<form:errors path="passwd" cssClass="errmsg" />
+            </div>
+            
+            <div class="input-field">
+              <label for="password">
+                Check Password
+              </label>
+              	<input type="password" name="password" />
+				<span id="passwordErr" class="errmsg"></span>
+            </div>
+            
+            <div class="input-field">
+              <label for="birth">
+                Birth
+              </label>
+				<form:input path="birth" />
+				<form:errors path="birth" cssClass="errmsg" />
+            </div>
+            
+            <div class="input-field">
+              <label for="phone">
+                Phone
+              </label>
+				<form:input path="phone" />
+				<form:errors path="phone" cssClass="errmsg" />
+            </div>
+            
+              <label for="gender">
+              	Gender
+              </label>
+              <p>
+              <label>
+				<form:radiobutton path="gender" value="W" /><span>여</span>
+			  </label>
+			  <label>
+				<form:radiobutton path="gender" value="M" /><span>남</span>
+			  </label>
+			  <label>
+				<form:errors path="gender" cssClass="errmsg" />
+			  </label>
+			  </p>
+			
+			<br />
+			
+			<p>
+				<button class="waves-effect waves-light btn" id="modifyBtn">수정</button>
+				<button class="waves-effect waves-light btn" id="modifyNoBtn">취소</button>
+			</p>
+			
+          </form:form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
 </body>
 </html>

@@ -16,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kh.myapp.member.dao.MemberDAO;
+import com.kh.myapp.member.service.MemberService;
 import com.kh.myapp.member.vo.MemberVO;
 
 
@@ -30,20 +31,20 @@ public class JDdbcTemplateTest {
 	private DataSource dataSource;
 	
 	@Autowired	// impl로 생성해줄 필요 없이 DAO 호출해줄 수 있도록 어노테이션 
-	@Qualifier("memberDAOImplJDBC")	// 같은 타입이 여러개일 경우 오류가 뜨기 때문에 이 id를 가진 것을 가져온다.
-	private MemberDAO memberDAO;	
+	@Qualifier("memberServiceImplXML")	// 같은 타입이 여러개일 경우 오류가 뜨기 때문에 이 id를 가진 것을 가져온다.
+	private MemberService memberService;	
 	
 	//회원등록
-	@Test @Ignore
+/*	@Test @Ignore
 	public void insert() 
 	{
 		MemberVO memberVO = new MemberVO("admin3@kh.com", "1234", "관리자", "19920615", "01012345678", "W");
-		logger.info(memberDAO.toString());
+		logger.info(memberService.toString());
 		
-		memberDAO.insert(memberVO);
-	}
+		memberService.memberInsert(memberVO);
+	}*/
 	
-	//회원수정
+/*	//회원수정
 	@Test @Ignore
 	public void update()
 	{
@@ -83,6 +84,22 @@ public class JDdbcTemplateTest {
 		for (String name : df.getBeanDefinitionNames()) {
 			logger.info(name + "\t" + df.getBean(name).getClass().getName());
 		}
+	}*/
+	
+	
+	//아이디 찾기 
+	@Test
+	public void findID()
+	{
+		String id = memberService.findID("관리자수정", "19920615", "01012345678");
+		logger.info(id);
+	}
+	
+	@Test
+	public void findPasswd()
+	{
+		String passwd = memberService.findPswd("admin@kh.com", "19920615", "01012345678");
+		logger.info(passwd);
 	}
 
 }

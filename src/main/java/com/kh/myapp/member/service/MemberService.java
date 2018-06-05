@@ -24,4 +24,10 @@ public interface MemberService
 	
 	//회원정보 삭제
 	public void memberDelete(String id);
+	
+	//아이디 찾기
+	public String findID(String name, String birth, String phone);
+	
+	//비밀번호 찾기 
+	public String findPswd(String id, String birth, String phone);
 }
