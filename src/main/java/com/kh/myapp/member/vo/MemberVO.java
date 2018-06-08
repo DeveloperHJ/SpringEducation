@@ -2,10 +2,13 @@ package com.kh.myapp.member.vo;
 
 import java.sql.Date;
 
+import javax.persistence.Entity;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.sun.istack.internal.NotNull;
+
+import lombok.Data;
 
 /*
 ID	VARCHAR2(30 BYTE)	No		1	회원아이디(이메일)
@@ -22,6 +25,7 @@ UDATE	DATE	No	SYSDATE 	8	수정일
  * USER: SPRING, TABLE: MEMBER
  * VO: 기존 DTO라고 보면 됨. 
  */
+@Entity
 public class MemberVO {
 	@Pattern(regexp="^[\\w=\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message="이메일 형식이 아닙니다.")
 	private String id;			//회원아이디(이메일)

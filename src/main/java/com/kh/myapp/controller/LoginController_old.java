@@ -40,7 +40,7 @@ public class LoginController_old {
 		return "login/login";
 	}
 	
-	@RequestMapping("/memLoginOK")
+/*	@RequestMapping("/memLoginOK")
 	public String memLoginOK(@Valid @ModelAttribute("user") LoginVO login, BindingResult result, Model model) 
 	{
 		// 오류가 있을 경우 
@@ -58,7 +58,7 @@ public class LoginController_old {
 		} else {
 			return "login/login";
 		}
-	}
+	}*/
 	
 	// 로그아웃 처리 부분 
 	@RequestMapping("/logOut")

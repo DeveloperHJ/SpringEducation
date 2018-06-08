@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
+	<!-- pom.xml Overview에 보면 Artifact에 있음. -->
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.kh</groupId>
+	<groupId>com.kh</groupId>	<!-- 프로젝트를 만든 조직의 의미 -->
 	<artifactId>myapp</artifactId>
 	<name>SpringEdu</name>
 	<packaging>war</packaging>
-	<version>1.0.0-BUILD-SNAPSHOT</version>
+	<version>1.0.0-BUILD-SNAPSHOT</version>	<!-- 어플리케이션 만든 버전 -->
 	<properties>
 		<java-version>1.8</java-version>
 		<org.springframework-version>5.0.6.RELEASE</org.springframework-version>
@@ -223,13 +225,37 @@
 		</dependency>
 		<!-- JPA(Java Persitence API) validation 끝 -->
 		
-		<!-- Bootstrap Icon -->
+		<!-- Bootstrap Icon 라이브러리 시작 -->
 		<dependency>
 		    <groupId>org.webjars</groupId>
 		    <artifactId>font-awesome</artifactId>
 		    <version>5.0.13</version>
 		</dependency>
-						
+		<!-- Bootstrap Icon 라이브러리 끝 -->
+		
+		<!-- Json 포맷 -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.9.5</version>
+		</dependency>
+		
+		<!-- XML 포맷 -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.dataformat</groupId>
+		    <artifactId>jackson-dataformat-xml</artifactId>
+		    <version>2.9.5</version>
+		</dependency>
+		
+		<!-- 어노테이션으로 DTO, VO 등의 객체에 setter, getter, constructor, tostring 등을 자동 생성 -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.0</version>
+		    <scope>provided</scope>
+		</dependency>
+		
+
 	</dependencies>
     <build>
         <plugins>
@@ -267,6 +293,33 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
+            
+            <!-- 메이븐을 통한 톰캣서버 배포 시작 -->
+            <plugin>
+            	<groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <warsourcedirectory>src/main/webapp</warsourcedirectory>
+                    <webxml>src/main/webapp/WEB-INF/web.xml</webxml>
+                </configuration>
+            </plugin>
+            
+            <plugin>
+            	<groupId>org.codehaus.mojo</groupId>
+            	<artifactId>tomcat-maven-plugin</artifactId>
+            	<version>1.1</version>
+            	<configuration>
+            		<url>http://localhost:9080/manager/text</url>
+            		<path>/</path>	<!-- 톰캣 webapps 폴더 밑에 디렉토리가 됨 -->
+            		<username>admin</username>
+            		<password>admin</password>
+            		<charset>UTF-8</charset>
+        			<uriEncoding>UTF-8</uriEncoding>
+            	</configuration>
+            </plugin>
+            <!-- 메이븐을 통한 톰캣서버 배포 끝 -->
+                
         </plugins>
     </build>
 </project>
