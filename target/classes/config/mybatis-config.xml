@@ -11,5 +11,6 @@
   <!-- 얼라이어스 타입 -->
   <typeAliases>
   	<typeAlias alias="MemberVO" type="com.kh.myapp.member.vo.MemberVO" />
+  	<typeAlias alias="BbsDTO" type="com.kh.myapp.bbs.dto.BbsDTO" />
   </typeAliases>
 </configuration>

@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
 <head>
+
 <jsp:include page="../header.jsp" />
 
 <title>Insert title here</title>
+
 <!-- 유효성 검사를 위한 jquery -->
 <script>
 $(function() {		
@@ -24,7 +26,12 @@ $(function() {
 	});
 });
 </script>
+
+<style>
+	.errmsg {color: red;}
+</style>
 </head>
+
 <body>
 <jsp:include page="../navbar.jsp" />
 
@@ -35,18 +42,24 @@ $(function() {
       <div class="card login-wrapper">
         <div class="card-content">
         
-		<form:form modelAttribute="login" action="/login/memLoginOK" method="post">
+        <c:url value="login" var="loginUrl" />
+        <c:if test="${param.fail != null }">
+        	<b>로그인 실패</b>
+        </c:if>
+		<form:form action="${pageContext.request.contextPath}/${loginUrl}" method="post">
         
         <div class="input-field">
           <i class="material-icons prefix">person_outline</i>
-          <form:input path="id" class="validate" />
-          <label for="id">Your email</label>
+          <input type="text" id="username" name="username" class="validate" />
+          <form:errors path="username" cssClass="errmsg" />
+          <label for="username">Your email</label>
         </div>
       
         <div class="input-field">
           <i class="material-icons prefix">lock_outline</i>
-          <form:password path="passwd" class="validate" />
-          <label for="passwd">Your password</label>
+          <input type="password" id="password" name="password" class="validate" />
+          <form:errors path="password" cssClass="errmsg" />
+          <label for="password">Your password</label>
         </div>
 	     
 	    <div>
@@ -68,5 +81,6 @@ $(function() {
   </div>
  </div>
 </section>
+
 </body>
 </html>

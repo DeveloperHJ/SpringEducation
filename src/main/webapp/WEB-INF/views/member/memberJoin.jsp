@@ -47,95 +47,67 @@ $(function(){
 <jsp:include page="../navbar.jsp" />
 
 <section>
- <div class="section container">
-  <div class="row">
-    <div class="col s12 m6 offset-m3">
-      <div class="card login-wrapper">
-        <div class="card-content">
-
-		<form:form modelAttribute="memberVO" action="/member/memberJoinOK" method="post">
-            <h4 class="center">Create Account</h4>
-
-            
-
-            <div class="input-field">
-              <label for="name" class="">
-                Name
-              </label>
-              	<form:input path="name" />
-				<form:errors path="name" cssClass="errmsg" />
+  <div class="py-5" style="background-image: url(&quot;https://pingendo.github.io/templates/sections/assets/form_red.jpg&quot;);">
+    <div class="container">
+      <div class="row">
+        <div class="align-self-center col-md-6 text-white">
+          <h1 class="text-center text-md-left display-3">Book a table</h1>
+          <p class="lead">Why waiting if you can do it online?</p>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body p-5">
+              <h3 class="pb-3">Make a reservation</h3>
+              <form:form modelAttribute="memberVO" action="/member/memberJoinOK" method="post">
+              <h4 class="center">Create Account</h4>
+                <div class="form-group">
+                  <label>Name</label>
+                  <form:input path="name" class="form-control" placeholder="Your name, please"/>
+				  <form:errors path="name" cssClass="errmsg" />
+                  </div>
+                <div class="form-group">
+                  <label>ID</label>
+                  <form:input path="id" class="form-control" placeholder="Your id, please"/>
+				  <form:errors path="id" cssClass="errmsg" />
+				</div>
+                <div class="form-group">
+                  <label>Password</label>
+                  <form:password path="passwd" class="form-control" placeholder="Your password, please"/>
+				  <form:errors path="passwd" cssClass="errmsg" />
+				</div>
+                <div class="form-group">
+                  <label>Check Password</label>
+                  <input type="password" name="password" class="form-control" placeholder="Check password"/>
+				  <span id="passwordErr" class="errmsg"></span>
+				</div>
+                <div class="form-group">
+                  <label>birth</label>
+                  <form:input path="birth" class="form-control" placeholder="Your birth, please"/>
+				  <form:errors path="birth" cssClass="errmsg" />
+				</div>
+                <div class="form-group">
+                  <label>phone</label>
+                  <form:input path="name" class="form-control" placeholder="Your phone, please"/>
+				  <form:errors path="name" cssClass="errmsg" />
+				</div>
+                <div class="form-group">
+                  <label>gender</label>
+                  <form:radiobutton path="gender" value="W" /><span>여</span>
+                  <form:radiobutton path="gender" value="M" /><span>남</span>
+                  <form:errors path="gender" cssClass="errmsg" />
+                </div>
+        		<p>
+		            <button class="btn mt-2 btn-outline-dark" id="joinBtn">가입</button>
+					<button class="btn mt-2 btn-outline-dark" id="joinCancelBtn">취소</button>
+					<button class="btn mt-2 btn-outline-dark" id="joinClearBtn">초기화</button>
+				</p>
+              </form:form>
             </div>
-
-            <div class="input-field">
-              <label for="id">
-                Email
-              </label>
-              	<form:input path="id" />
-				<form:errors path="id" cssClass="errmsg" />	
-            </div>
-
-            <div class="input-field">
-              <label for="passwd">
-                Password
-              </label>
-				<form:password path="passwd" />
-				<form:errors path="passwd" cssClass="errmsg" />
-            </div>
-            
-            <div class="input-field">
-              <label for="password">
-                Check Password
-              </label>
-              	<input type="password" name="password" />
-				<span id="passwordErr" class="errmsg"></span>
-            </div>
-            
-            <div class="input-field">
-              <label for="birth">
-                Birth
-              </label>
-				<form:input path="birth" />
-				<form:errors path="birth" cssClass="errmsg" />
-            </div>
-            
-            <div class="input-field">
-              <label for="phone">
-                Phone
-              </label>
-				<form:input path="phone" />
-				<form:errors path="phone" cssClass="errmsg" />
-            </div>
-            
-              <label for="gender">
-              	Gender
-              </label>
-              <p>
-              <label>
-				<form:radiobutton path="gender" value="W" /><span>여</span>
-			  </label>
-			  <label>
-				<form:radiobutton path="gender" value="M" /><span>남</span>
-			  </label>
-			  <label>
-				<form:errors path="gender" cssClass="errmsg" />
-			  </label>
-			  </p>
-			
-			<br />
-			
-			<p>
-	            <button class="waves-effect waves-light btn" id="joinBtn">가입</button>
-				<button class="waves-effect waves-light btn" id="joinCancelBtn">취소</button>
-				<button class="waves-effect waves-light btn" id="joinClearBtn">초기화</button>
-			</p>
-			
-          </form:form>
-
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </section>
 
 </body>

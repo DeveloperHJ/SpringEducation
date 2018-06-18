@@ -95,14 +95,7 @@ public class MemberController {
 		model.addAttribute("memberVOS", alist);
 		return "/member/memberList";
 	}
-	
-	//로그인 했을 경우
-	@RequestMapping(value="/memberLogin", method=RequestMethod.POST)
-	public String memLogin() 
-	{
-		return "/member/memberList";
-	}
-	
+
 	//멤버 아이디/비밀번호 찾기 페이지로 이동 
 	@RequestMapping(value="/memberFind")
 	public void memberFind(Model model) {	}

@@ -1,85 +1,72 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+    
+
 <!DOCTYPE html>
 <html>
 <head>
-
-<jsp:include page="../header.jsp" flush="true"></jsp:include>
+<jsp:include page="../header.jsp" />
 
 <title>Insert title here</title>
 <!-- 유효성 검사를 위한 jquery -->
-
 <script>
 $(function() {		
-	$("#joinBtn").on("click",function(e){
+/* 	$("#joinBtn").on("click",function(e){
 		e.preventDefault();		
 		$(location).attr("href", $(this).attr("data-url"));
 		location.href="/member/memberJoin";
-	});		
+	});		 */
 	
 	$("#loginBtn").on("click",function(e){
 		e.preventDefault();		
 		$("form").submit();
-	});		
-	
-/* 	$("form").submit(function() {
-		if($("#id").val() == "") {
-			alert("아이디를 입력해주세요!");
-			$("#id").focus();
-			return false;
-		} else if($("#id").val().length < 4) {
-			alert("아이디는 최소 4글자 이상이어야 합니다.");
-			$("#id").focus();
-			return false;
-		} else if($("#passwd").val() == "") {
-			alert("비밀번호를 입력해주세요!");
-			$("#passwd").focus();
-			return false;
-		} 
-	}); */
+	});
 });
 </script>
 </head>
 <body>
-<jsp:include page="../navbar.jsp" flush="true"></jsp:include>
-<div class="container">
-<hr />
-<h2>로그인</h2>
-<hr />
-<form:form modelAttribute="login" action="/login/memLoginOK" method="post">
-	<table>
-		<tr>
-			<th>아이디</th>
-			<td>
-				<form:input path="id" />
-				<form:errors path="id" cssClass="errmsg" />
-			</td>
-		</tr>
-		<tr>
-			<th>비밀번호</th>
-			<td>
-				<form:password path="passwd" />
-				<form:errors path="passwd" cssClass="errmsg" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<button id="loginBtn">로그인</button>
-			</td>
-			<td>
-				<button id="joinBtn" data-url="/member/memberJoin">회원가입</button>
-			</td>
-		</tr>
-	</table>
-</form:form>
-<div class="fa-3x">
-  <i class="fas fa-spinner fa-spin"></i>
-  <i class="fas fa-circle-notch fa-spin"></i>
-  <i class="fas fa-sync fa-spin"></i>
-  <i class="fas fa-cog fa-spin"></i>
-  <i class="fas fa-spinner fa-pulse"></i>
-</div>
-</div>
+<jsp:include page="../navbar.jsp" />
+
+<section style="margin-top: 10%">
+ <div class="section container">
+  <div class="row">
+    <div class="col s12 m6 offset-m3">
+      <div class="card login-wrapper">
+        <div class="card-content">
+        
+		<form:form modelAttribute="login" action="/login/memLoginOK" method="post">
+        
+        <div class="input-field">
+          <i class="material-icons prefix">person_outline</i>
+          <form:input path="id" class="validate" />
+          <label for="id">Your email</label>
+        </div>
+      
+        <div class="input-field">
+          <i class="material-icons prefix">lock_outline</i>
+          <form:password path="passwd" class="validate" />
+          <label for="passwd">Your password</label>
+        </div>
+	     
+	    <div>
+		<button class="btn waves-effect waves-light" type="submit" name="action" id="loginBtn">
+	   	  <i class="material-icons right">send</i> Login
+	    </button>
+	    </div>
+	    
+		<p style="text-align:right">
+		  Not a member? <a id="joinBtn" href="/member/memberJoin">Sign in</a><br>
+		  Not remember? 
+		  <a id="joinBtn" href="../member/memberFind">Find ID/Password</a> 
+		</p>
+		
+		</form:form>
+		</div>
+ 	  </div>
+  	</div>
+  </div>
+ </div>
+</section>
 </body>
 </html>
