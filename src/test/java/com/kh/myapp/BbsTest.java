@@ -107,7 +107,7 @@ class BbsTest {
 		PageCriteria pageCriteria;
 		try {
 			pageCriteria = new PageCriteria(recordCriteria, bbsdao.totalRec());
-			List<BbsDTO> list = bbsdao.list(pageCriteria);
+			List<BbsDTO> list = bbsdao.list(recordCriteria);
 			
 			logger.info(list.toString());
 		} catch (Exception e) {

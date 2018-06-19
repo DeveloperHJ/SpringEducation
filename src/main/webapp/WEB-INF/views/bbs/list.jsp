@@ -77,7 +77,7 @@ th, #tdnum, #tdname, #tdhit, #tdcdate { text-align: center }
         		<C:forEach begin="1" end="${dto.BIndent}">&nbsp;&nbsp;</C:forEach>
         		RE : 
         	</C:if>
-        	<a class="text-dark" href="/bbs/view?bNum=${dto.BNum}">
+        	<a class="text-dark" href="/bbs/view?${pageCriteria.makeSearchURL(pageCriteria.recordCriteria.reqPage)}&bNum=${dto.BNum}">
         	${dto.BTitle}
         	</a>
         </td>
@@ -92,28 +92,28 @@ th, #tdnum, #tdname, #tdhit, #tdcdate { text-align: center }
   <nav aria-label="Page navigation example">
 	  <ul class="pagination justify-content-center">
 	  	<li class="page-item">
-	  	<a class="page-link" href="/bbs/list?reqPage=${pageCriteria.makeSearchURL(1)}" tabindex="-1">◀</a>
+	  	<a class="page-link" href="/bbs/list?${pageCriteria.makeSearchURL(1)}" tabindex="-1">◀</a>
 	  	</li>
 	    <li class="page-item">
 	      <C:if test="${pageCriteria.prev}"> <!-- pageCreateria.isPrev() -->
-	      <a class="page-link" href="/bbs/list?reqPage=${pageCriteria.makeSearchURL(pageCriteria.startPage-1)}" tabindex="-1">◁</a>
+	      <a class="page-link" href="/bbs/list?${pageCriteria.makeSearchURL(pageCriteria.startPage-1)}" tabindex="-1">◁</a>
 	      </C:if>
 	    </li>
 	    <C:forEach var="pageNum" begin="${pageCriteria.getStartPage()}" end="${pageCriteria.getEndPage()}" step="1">
 	   	 	<C:if test="${pageNum eq pageCriteria.recordCriteria.reqPage}">
-	    		<li class="page-item active"><a class="page-link" href="/bbs/list?reqPage=${pageCriteria.makeSearchURL(pageNum)}">${pageNum}</a></li>
+	    		<li class="page-item active"><a class="page-link" href="/bbs/list?${pageCriteria.makeSearchURL(pageNum)}">${pageNum}</a></li>
 	    	</C:if>
 	   		<C:if test="${pageNum ne pageCriteria.recordCriteria.reqPage}">
-	    	<li class="page-item"><a class="page-link" href="/bbs/list?reqPage=${pageCriteria.makeSearchURL(pageNum)}">${pageNum}</a></li>
+	    	<li class="page-item"><a class="page-link" href="/bbs/list?${pageCriteria.makeSearchURL(pageNum)}">${pageNum}</a></li>
 	    	</C:if>
 	    </C:forEach>
 	    <li class="page-item">
 	      <C:if test="${pageCriteria.next}"> <!-- pageCreateria.isNext() -->
-	      <a class="page-link" href="/bbs/list?reqPage=${pageCriteria.makeSearchURL(pageCriteria.endPage+1)}">▷</a>
+	      <a class="page-link" href="/bbs/list?${pageCriteria.makeSearchURL(pageCriteria.endPage+1)}">▷</a>
 	      </C:if>
 	    </li>
 	    <li class="page-item">
-	  	<a class="page-link" href="/bbs/list?reqPage=${pageCriteria.makeSearchURL(pageCriteria.finalEndPage)}" tabindex="-1">▶</a>
+	  	<a class="page-link" href="/bbs/list?${pageCriteria.makeSearchURL(pageCriteria.finalEndPage)}" tabindex="-1">▶</a>
 	  	</li>
 	  </ul>
   </nav> 

@@ -12,5 +12,6 @@
   <typeAliases>
   	<typeAlias alias="MemberVO" type="com.kh.myapp.member.vo.MemberVO" />
   	<typeAlias alias="BbsDTO" type="com.kh.myapp.bbs.dto.BbsDTO" />
+  	<typeAlias alias="RbbsDTO" type="com.kh.myapp.bbs.dto.RbbsDTO" />
   </typeAliases>
 </configuration>

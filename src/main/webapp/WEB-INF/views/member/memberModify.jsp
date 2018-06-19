@@ -5,7 +5,7 @@
 <html>
 <head>
 <jsp:include page="../header.jsp" />
-
+ 
 <script>
 $(function(){
 	$("input[name=password]").keyup(function(e) {

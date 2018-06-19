@@ -46,6 +46,10 @@ public class BbsDAOImplJDBC implements BbsDAO {
 	@Override
 	public void reply(BbsDTO bbsdto) {
 	}
+	
+	@Override
+	public void updateStep(BbsDTO bbsdto) throws Exception {
+	}
 
 	@Override
 	public int totalRec() {

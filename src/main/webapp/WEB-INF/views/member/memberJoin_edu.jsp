@@ -6,7 +6,7 @@
 <head>
 
 <jsp:include page="../header.jsp" flush="true"></jsp:include>
-
+ 
 <script>
 $(function(){
 	$("input[name=password]").keyup(function(e) {

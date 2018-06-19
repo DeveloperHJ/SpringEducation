@@ -13,31 +13,31 @@
   	<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons"><span class="grey-text text-darken-3">menu</span></i></a>
     <ul class="right hide-on-med-and-down">
       <li><a href="/bbs/list"><span class="grey-text text-darken-3">게시판</span></a></li>
-<%--   	<c:choose>
-  		<c:when test="${login.username eq null}"> --%>
+		<sec:authorize access="isAnonymous()">
       		<li id="loginOn"><a href="/login/login"><span class="grey-text text-darken-3">로그인</span></a></li>
-<%--         </c:when>
-    	<c:otherwise> --%>
+		</sec:authorize>
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
  	   	 	<li id="myModify"><a href="/member/memberList"><span class="grey-text text-darken-3">회원목록</span></a></li>
-    	    <li id="myModify"><a href="/member/memberModify/${login.username}"><span class="grey-text text-darken-3">내정보</span></a></li>
+ 	   	</sec:authorize>
+		<sec:authorize access="isAuthenticated()">
+    	    <li id="myModify"><a href="/member/memberModify/${user.username}"><span class="grey-text text-darken-3">내정보</span></a></li>
       		<li id="loginOff"><a href="/login/logOut"><span class="grey-text text-darken-3">로그아웃</span></a></li>
-<%--     	</c:otherwise>
-    </c:choose> --%>
+      	</sec:authorize>
     </ul>
 
     
 	<ul class="sidenav" id="mobile-demo">
 	    <li><a href=#><span class="grey-text text-darken-3">게시판</span></a></li>
-<%--     <c:choose>
-  		<c:when test="${login.username eq null}"> --%>
+		  <sec:authorize access="isAnonymous()">
 	    	<li><a href="/login/login"><span class="grey-text text-darken-3">로그인</span></a></li>
-<%-- 	    </c:when>
-    	<c:otherwise> --%>
+		  </sec:authorize>
+		  <sec:authorize access="hasRole('ROLE_ADMIN')">
     		<li id="myModify"><a href="/member/memberList"><span class="grey-text text-darken-3">회원목록</span></a></li>
-    	    <li id="myModify"><a href="/member/memberModify/${login.username}"><span class="grey-text text-darken-3">내정보</span></a></li>
+    	  </sec:authorize>
+		  <sec:authorize access="isAuthenticated()">
+    	    <li id="myModify"><a href="/member/memberModify/"><span class="grey-text text-darken-3">${user.username}내정보</span></a></li>
 	    	<li id="loginOff"><a href="/login/logOut"><span class="grey-text text-darken-3">로그아웃</span></a></li>
-<%--        	</c:otherwise>
-    </c:choose> --%>
+          </sec:authorize>
 	</ul>
   </div>
 </div>

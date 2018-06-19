@@ -51,7 +51,7 @@ $(function() {
 	<table>
 		<tr>
 			<th>아이디</th>
-			<td>
+			<td> 
 				<form:input path="id" />
 				<form:errors path="id" cssClass="errmsg" />
 			</td>

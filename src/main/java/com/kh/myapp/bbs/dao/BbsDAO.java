@@ -33,6 +33,9 @@ public interface BbsDAO {
 	// 답글 등록 
 	void reply(BbsDTO bbsdto) throws Exception;
 
+	// 이전 Step 업데이트 
+	void updateStep(BbsDTO bbsdto) throws Exception;
+	
 	// 전체 게시물 수 구하기 
 	int totalRec() throws Exception;
 

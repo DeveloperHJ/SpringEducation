@@ -13,6 +13,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.kh.myapp.bbs.dao.BbsDAO;
 import com.kh.myapp.bbs.dto.BbsDTO;
 import com.kh.myapp.bbs.service.BbsService;
@@ -51,40 +53,49 @@ public class BbsController {
 	}
 	
 	//게시글 목록
-	@RequestMapping("/list")
-	public void list(Model model) throws Exception 
+	@RequestMapping(value = "/list", method = GET)
+	public void list(HttpServletRequest request, Model model) throws Exception 
 	{
-		RecordCriteria recordCriteria = new RecordCriteria(1, 10);
-		PageCriteria pageCriteria = new PageCriteria(recordCriteria, bs.totalRec());
-		List<BbsDTO> list = bs.list(recordCriteria);
+		logger.info("list GET..");
 		
-		model.addAttribute("list", list);
-		model.addAttribute("pageCriteria", pageCriteria);
-	}
-	
-	//게시물 검색
-	@RequestMapping(value="/searchList", method=GET)
-	public String list(@RequestParam("searchType") String searchType, @RequestParam("keyword") String keyword, 
-												 Model model)
-	{
-		RecordCriteria rc;
-		PageCriteria pc;
-		List<BbsDTO> list;
+		int reqPage = 0;
 		
-		try {
-			rc 		= new FindCriteria(1, 10, searchType, keyword);
-			list = bs.list(rc);
-			int totalRec = bs.searchTotalRec((FindCriteria) rc);
-			pc		= new PageCriteria(rc, totalRec);
-			
-			model.addAttribute("list", list);
-			model.addAttribute("findCriteria", (FindCriteria)rc);
-			model.addAttribute("pageCriteria", pc);
-		} catch (Exception e) {
-			e.printStackTrace();
+		// 요청페이지가 없으면 1페이지로 이동
+		if (request.getParameter("reqPage") == null ||
+				request.getParameter("reqPage") == "") {
+			reqPage = 1;
+		}else {
+			reqPage = Integer.parseInt(request.getParameter("reqPage"));
 		}
 		
-		return "/bbs/list";
+		// 검색유무조건에 따라 분기
+		String searchType = request.getParameter("searchType");
+		String keyword	= request.getParameter("keyword");
+		
+
+		List<BbsDTO> list = null;
+		PageCriteria pc = null;
+		RecordCriteria rc = null;
+		
+		if(keyword == null || keyword.trim().equals("")) {
+			// 검색조건이 없는 경우
+			rc = new RecordCriteria(reqPage, 10);		
+			list = bs.list(rc);		
+			int totalRec = bs.totalRec();
+			pc = new PageCriteria(rc,totalRec);		
+			
+		}else {
+			// 검색조건이 있는 경우
+			rc = new FindCriteria(reqPage, 10, searchType, keyword);
+			list = bs.list(rc);		
+			int totalRec = bs.searchTotalRec((FindCriteria)rc);
+			pc = new PageCriteria(rc,totalRec);	
+			
+			request.setAttribute("findCriteria", (FindCriteria)rc);			
+		}	
+				
+		request.setAttribute("list", list);
+		request.setAttribute("pageCriteria", pc);
 	} 
 	
 	//게시글 보기
@@ -129,8 +140,4 @@ public class BbsController {
 		model.addAttribute("view", bbsdto);
 		return "redirect:/bbs/view?bNum="+bNum;
 	}
-	
-
-	
-	
 }

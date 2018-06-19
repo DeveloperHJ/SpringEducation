@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%-- <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
- --%>    
+<sec:authentication var="user" property="principal" scope="session" />
+
+<%-- <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> --%>
+  
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,17 +24,17 @@ th { width: 100px }
 <body>
 <jsp:include page="../navbar.jsp" />
 
-<sec:authentication var="user" property="principal" scope="session" />
-
 <div class="container">
   <br />
   <h2 style="text-align: center"> 글쓰기 </h2> <br></br>
   <form action="/bbs/write" method="post">
+  <sec:csrfInput /> <!-- 스프링 폼 태그에는 포함돼있어서 따로 쓰지 않아도 됨. -->
   	<input type="hidden" name="reqPage" value="${param.reqPage}" />	<!-- 글쓴 뒤 페이지 유지 -->
+  	<input type="hidden" name="bID" value="${user.username}" />	<!-- 글쓴 뒤 페이지 유지 -->
   		<table class="table table-hover">
 			<tr>
 				<th class = "th-dark" scope="col">작성자</th>
-				<td><input type="text" class="form-control" name="bTitle" placeholder="제목을 입력하세요." value="${user.name}/(${user.username}) readOnly='true'"></td>
+				<td><input type="text" class="form-control" name="bName" placeholder="이름을 입력하세요." value="${user.name}" readOnly="true"></td>
 			</tr>
 			<tr>
 				<th class = "th-dark" scope="col">제목</th>

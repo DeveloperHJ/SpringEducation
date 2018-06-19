@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authentication var="user" property="principal" scope="session" />
 
 <!DOCTYPE html>
 <html>
@@ -31,7 +33,7 @@ th { width: 100px }
 		$("#delete").click(function() {
 			msg = "게시물을 삭제하시겠습니까?";
  			if(confirm(msg)!=0) { // yes 클릭
-				location.href="/bbs/delete?bNum=${view.BNum}";
+				location.href="/bbs/delete?reqPage=${recordCriteria.reqPage}&bNum=${view.BNum}";
 			} 
 		});
 	}); 
@@ -48,16 +50,18 @@ th { width: 100px }
 <%--   <input type="hidden" name="reqPage" value="${recordCriteria.reqPage}"/> --%>
 
   <div id='viewMode' style="text-align: right">
-  <a href="/bbs/list?reqPage=${recordCriteria.reqPage}" class="btn btn-primary btn active" role="button" aria-pressed="true">목록</a>
+  <a href="/bbs/list?reqPage=${param.reqPage}" class="btn btn-primary btn active" role="button" aria-pressed="true">목록</a>
+  <C:if test="${user.username eq view.BID}">
   <button id="modify" type="button" class="btn btn-primary">수정</button>
   <button id="delete" type="button" class="btn btn-primary">삭제</button>
+  </C:if>
   </div>
   
   <div id='modifyMode' style="text-align: right; display: none;">
   <input type="hidden" name="BNum" value="${view.BNum}" />
   <input id="submit" class="btn btn-primary" type="submit" value="완료">
   <button id="cancel" type="button" class="btn btn-secondary">취소</button>
-  <a href="/bbs/list?reqPage=${recordCriteria.reqPage}" class="btn btn-primary btn active" role="button" aria-pressed="true">목록</a>
+  <a href="/bbs/list?reqPage=${param.reqPage}" class="btn btn-primary btn active" role="button" aria-pressed="true">목록</a>
   </div>
   
   <br />
@@ -83,7 +87,7 @@ th { width: 100px }
 			<td><input id="write" type="text" readonly="readonly" class="form-control" name="BContent" value="${view.BContent}"></td>
 		</tr>
 	</table> 
-	<p style="text-align: right"><a href="/bbs/replyForm?bNum=${view.BNum}" class="btn btn-primary">답글</a></p>
+	<p style="text-align: right"><a href="/bbs/replyForm?reqPage=${param.reqPage}&bNum=${view.BNum}" class="btn btn-primary">답글</a></p>
 
   	</form>
 	<%-- <jsp:include page="reply.jsp" /> --%>

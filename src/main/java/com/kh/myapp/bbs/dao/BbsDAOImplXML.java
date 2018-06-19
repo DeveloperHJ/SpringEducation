@@ -31,11 +31,13 @@ public class BbsDAOImplXML implements BbsDAO {
 
 	@Override
 	public BbsDTO view(int bNum) throws Exception {
+		updateHit(bNum);
 		return sqlSession.selectOne("view", bNum);
 	}
 
 	@Override
 	public void updateHit(int bNum) throws Exception {
+		sqlSession.update("updateHit", bNum);
 	}
 
 	@Override
@@ -56,10 +58,16 @@ public class BbsDAOImplXML implements BbsDAO {
 
 	@Override
 	public void reply(BbsDTO bbsdto) throws Exception {
-		System.out.println("BbsDAOImplXML reply(BbsDTO bbsdto)");
+		updateStep(bbsdto);
+		
 		sqlSession.insert("reply", bbsdto);
 	}
 
+	@Override
+	public void updateStep(BbsDTO bbsdto) throws Exception {
+		System.out.println("updateStep" + bbsdto.toString());
+		sqlSession.update("updateStep", bbsdto);
+	}
 
 	@Override
 	public int totalRec() throws Exception {
@@ -76,5 +84,6 @@ public class BbsDAOImplXML implements BbsDAO {
 	public int searchTotalRec(FindCriteria findCriteria) throws Exception {
 		return sqlSession.selectOne("searchTotalRec", findCriteria);
 	}
+
 
 }

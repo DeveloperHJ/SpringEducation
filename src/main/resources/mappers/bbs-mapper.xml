@@ -6,8 +6,8 @@
 <!-- 인터페이스 이름 작성 -->
 <mapper namespace="com.kh.myapp.bbs.dao.BbsDAO">
 	<insert id="insert">
-		insert into bbs (bnum, btitle, bname, bhit, bcontent, bgroup, bstep, bindent) 
-		values (bbsnum_seq.nextval, #{bTitle}, #{bName}, #{bHit}, #{bContent}, bbsnum_seq.currval, 0, 0)
+		insert into bbs (bnum, btitle, bid, bname, bhit, bcontent, bgroup, bstep, bindent) 
+		values (bbsnum_seq.nextval, #{bTitle}, #{bID}, #{bName}, #{bHit}, #{bContent}, bbsnum_seq.currval, 0, 0)
 	</insert>
 	
 	<select id="list" resultType="BbsDTO">
@@ -17,7 +17,7 @@
 	</select>
 	
 	<select id="view" resultType="BbsDTO">
-		select bnum, btitle, bname, bhit, bcontent, bcdate, budate from bbs 
+		select bnum, btitle, bid, bname, bhit, bcontent, bcdate, budate from bbs 
 		where bnum = #{bNum}
 	</select>
 	
@@ -29,15 +29,23 @@
 		delete from bbs where bnum = #{bNum}
 	</delete>
 	
+	<update id="updateHit">
+		update bbs set bHit = bHit + 1 where bNum = #{bNum}
+	</update>
+	
 	<select id="replyView" resultType="BbsDTO">
 		select bnum, btitle, bname, bhit, bcontent, bcdate, budate from bbs 
 		where bnum = #{bNum}
 	</select>
 	
 	<insert id="reply">
-	  	insert into bbs(bnum, btitle, bname, bhit, bcontent, bgroup, bstep, bindent) 
-	  	values (bbsnum_seq.nextval, #{bTitle}, #{bName}, #{bHit}, #{bContent}, #{bNum}, #{bStep}+1, #{bIndent}+1)
+	  	insert into bbs(bnum, btitle, bid, bname, bhit, bcontent, bgroup, bstep, bindent) 
+	  	values (bbsnum_seq.nextval, #{bTitle}, #{bID}, #{bName}, #{bHit}, #{bContent}, #{bNum}, #{bStep}+1, #{bIndent}+1)
 	</insert>
+	
+	<update id="updateStep">
+		update bbs set bstep = bstep+1 where bgroup = #{bGroup} and bstep > #{bStep}
+	</update>
 	
 	<select id="listPageCri" resultType="BbsDTO">
 		select t2.* 

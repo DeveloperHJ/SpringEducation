@@ -19,4 +19,12 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       
   <script src="/webjars/jquery/3.3.1/dist/jquery.js"></script>
+  
+  
+  <script>
+  $(document).ready(function(){
+	    $('.collapsible').collapsible();
+	    $('.sidenav').sidenav();
+  });
+  </script>
 </head>

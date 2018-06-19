@@ -6,7 +6,6 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!-- Spring security 적용에서 제외 시작, core와 관련없어서 security="none" -->
-	<http pattern="/bbs/**" security="none" />
 	<http pattern="/resources/**" security="none" />
 	<http pattern="/images/**" security="none" />
 	<http pattern="/css/**" security="none" />
@@ -14,8 +13,8 @@
 	<!-- Spring security 적용에서 제외 끝 -->
 
 	<!-- auto-config = "true" : 로그인 페이지/http기본인증/로그아웃 기능들을 제공 -->
-	<http auto-config="true">
-		
+	<http auto-config="true" use-expressions="true">
+	
 		<!-- 
 			login-page 로그인 페이지 지정 속성 
 			authentication-failure-url 로그인 실패 시 이동페이지 지정 
@@ -27,6 +26,7 @@
 		<!-- access="isAuthenticated()" : 인증된 사용자만 접근 -->
 		<intercept-url pattern="/bbs/**" 	access="isAuthenticated()" />
 		<intercept-url pattern="/member/**" access="isAuthenticated()" />
+		<intercept-url pattern="/member/memberList" access="hasRole('ROLE_ADMIN')" />
 		
 		<!-- 관리자만 접근 가능 -->
 		<intercept-url pattern="/admin/**" access="hasAuthority('ROLE_ADMIN')" />
