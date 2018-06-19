@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- 인터페이스 이름 작성 -->
+<mapper namespace="com.kh.myapp.bbs.dao.RbbsDAO">
+	<insert id="write">
+		insert into replybbs(rnum, rid, bnum, rname, rcontent, rgood, rbad, rgroup, rstep, rindent) 
+		values(rbbsNum_seq.nextval, #{rid}, #{bnum}, #{rname}, #{rcontent}, 0, 0, rbbsNum_seq.currval, 0, 0)
+	</insert>
+	
+	<select id="listAll" resultType="RbbsDTO">
+		select rnum, rid, bnum, rname, rcontent, rgood, rbad, rcdate, rudate, rgroup, rstep, rindent 
+		from replybbs where bnum = #{bnum} 
+		order by rgroup desc, rstep asc
+	</select>
+	
+	<!-- 요청페이지의 글 목록 가져오기 -->
+	<select id="list" parameterType="MAP" resultType="RbbsDTO">
+		select t2.* 
+		from (select row_number() over (order by rgroup desc, rstep asc) as num, t1.* 
+		from replybbs t1 where bNum = #{bnum}) t2 
+		where num between #{recordCriteria.startRecord} and #{recordCriteria.endRecord}
+	</select>
+	
+	<update id="update">
+		update replybbs set rudate = sysdate, rcontent = #{rcontent}
+		where rNum = #{rnum}
+	</update>
+	
+	<delete id="delete">
+		delete from replybbs where rnum = #{rnum}
+	</delete>
+	
+	<!-- 원댓글 보기 -->
+	<select id="replyView" resultType="RbbsDTO">
+		select rnum, rid, bnum, rname, rcontent, rcdate, rgroup, rstep, rindent 
+		from replybbs where rnum = #{rnum}
+	</select>
+	
+	<!-- 리댓 달기 -->
+	<insert id="reply">
+		insert into replybbs(rnum, rid, bnum, rname, rcontent, rgroup, rstep, rindent ) 
+		values (rbbsnum_seq.nextval, #{rid}, #{bnum}, #{rname}, #{rcontent}, #{rgroup}, #{rstep}+1, #{rindent}+1)
+	</insert>
+	
+	<update id="goodOrBad">
+		<choose>
+			<when test="goodOrBad == 'good'">
+				update replybbs set rgood = rgood + 1 where rnum = #{rnum}
+			</when>
+			<when test="goodOrBad == 'bad'">
+				update replybbs set rbad = rbad + 1 where rnum = #{rnum}
+			</when>
+		</choose>
+	</update>
+	
+	<!-- 댓글 총계 -->
+	<select id="replyTotalRec" resultType="Integer">
+		select count(*) from replybbs where bNum = #{bnum}
+	</select>
+	
+	<update id="updateStep">
+		update replybbs set rstep = rstep+1 
+		where rgroup = #{rgroup} and rstep > #{rstep}
+	</update>
+	
+	
+</mapper>
