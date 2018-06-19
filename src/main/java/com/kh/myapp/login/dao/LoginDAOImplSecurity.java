@@ -29,7 +29,7 @@ public class LoginDAOImplSecurity implements UserDetailsService {
 		MemberVO memberVO;
 		StringBuffer str = new StringBuffer();
 		
-		str.append("select id, passd, name, birth, phone, gender, cdate, udate from member where id = ?");
+		str.append("select id, passwd, name, birth, phone, gender, cdate, udate from member where id = ?");
 		
 		memberVO = (MemberVO)this.jdbcTemplate.queryForObject(str.toString(), 
 							new Object[] {username}, new BeanPropertyRowMapper<>(MemberVO.class));
@@ -41,7 +41,7 @@ public class LoginDAOImplSecurity implements UserDetailsService {
 		// 2) 사용자 권한 정보 가져오기 
 		List<String> auth = new ArrayList<>();
 		StringBuffer str2 = new StringBuffer();
-		str.append("select role from user_role where id = ?");
+		str2.append("select role from user_role where id = ?");
 		
 		auth = (ArrayList<String>) this.jdbcTemplate.queryForList(str2.toString(), 
 						new Object[] {username}, String.class);

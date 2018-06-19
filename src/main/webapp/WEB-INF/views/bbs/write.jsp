@@ -22,6 +22,8 @@ th { width: 100px }
 <body>
 <jsp:include page="../navbar.jsp" />
 
+<sec:authentication var="user" property="principal" scope="session" />
+
 <div class="container">
   <br />
   <h2 style="text-align: center"> 글쓰기 </h2> <br></br>
@@ -30,8 +32,7 @@ th { width: 100px }
   		<table class="table table-hover">
 			<tr>
 				<th class = "th-dark" scope="col">작성자</th>
-				<td><sec:authentication var="user" property="principal" />${user.name}</td>
-				<!-- <td><input type="text" class="form-control" name="bName" placeholder="이름을 입력하세요."></td> -->
+				<td><input type="text" class="form-control" name="bTitle" placeholder="제목을 입력하세요." value="${user.name}/(${user.username}) readOnly='true'"></td>
 			</tr>
 			<tr>
 				<th class = "th-dark" scope="col">제목</th>

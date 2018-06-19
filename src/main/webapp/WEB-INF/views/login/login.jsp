@@ -71,7 +71,7 @@ $(function() {
 		<p style="text-align:right">
 		  Not a member? <a id="joinBtn" href="/member/memberJoin">Sign in</a><br>
 		  Not remember? 
-		  <a id="joinBtn" href="../member/memberFind">Find ID/Password</a> 
+		  <a id="joinBtn" href="/member/memberFind">Find ID/Password</a> 
 		</p>
 		
 		</form:form>

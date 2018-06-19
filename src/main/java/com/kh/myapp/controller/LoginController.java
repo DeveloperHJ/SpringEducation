@@ -43,15 +43,15 @@ public class LoginController {
 															// 요청경로와 받는 페이지는 같지 않아도 됨.
 	public String securityLogIn(Model model)
 	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		logger.info("인증" + auth.getPrincipal().toString());
 		
 		// 익명의 유저가 아닐 경우 home으로 이동 (=로그인 했을 경우)
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if(!auth.getPrincipal().equals("anonymousUser")) {
-			logger.info("인증" + auth.getPrincipal());
+			logger.info("사용자" + auth.getPrincipal());
 			return "redirect:/";
 		}
 		
-		model.addAttribute("login", new SecurityLoginVO("test", "test", AuthorityUtils.NO_AUTHORITIES));
 		return "login/login";
 	}
 	

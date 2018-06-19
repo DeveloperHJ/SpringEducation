@@ -40,10 +40,8 @@ th, #tdnum, #tdname, #tdhit, #tdcdate { text-align: center }
 		    <option value="C" <C:out value="${findCriteria.searchType == 'C' ? 'selected' : '' }" />>내용</option>
 		    <option value="W" <C:out value="${findCriteria.searchType == 'W' ? 'selected' : '' }" />>작성자</option>
 	    </select>
-	    <label>Materialize Select</label>
 	  </div>
 	
-      <br>
   	  <div class="input-field col s12 m6">
         <input name="keyword" placeholder="검색 내용 입력" value="${findCriteria.keyword}">
       </div>

@@ -5,9 +5,12 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<!-- Spring security 적용에서 제외 시작 -->
+	<!-- Spring security 적용에서 제외 시작, core와 관련없어서 security="none" -->
 	<http pattern="/bbs/**" security="none" />
 	<http pattern="/resources/**" security="none" />
+	<http pattern="/images/**" security="none" />
+	<http pattern="/css/**" security="none" />
+	<http pattern="/js/**" security="none" />
 	<!-- Spring security 적용에서 제외 끝 -->
 
 	<!-- auto-config = "true" : 로그인 페이지/http기본인증/로그아웃 기능들을 제공 -->
@@ -19,23 +22,24 @@
 		 -->
 		 <!-- 로그인 페이지와 로그인 실패시 페이지 지정 -->
 		<form-login login-page="/login/login" 
-		authentication-failure-url="/login/login?fail" />
+					authentication-failure-url="/login/login?fail" />
 		
 		<!-- access="isAuthenticated()" : 인증된 사용자만 접근 -->
-		<intercept-url pattern="/bbs/**" access="isAuthenticated()" />
+		<intercept-url pattern="/bbs/**" 	access="isAuthenticated()" />
 		<intercept-url pattern="/member/**" access="isAuthenticated()" />
 		
 		<!-- 관리자만 접근 가능 -->
 		<intercept-url pattern="/admin/**" access="hasAuthority('ROLE_ADMIN')" />
 		
 		<!-- access="permitALL" 모든 접근 허용 --> 
-		<intercept-url pattern="/**" access="permitAll" /> 
+		<intercept-url pattern="*/**" access="permitAll()" /> 
 		
 		<!-- 로그인 성공시 주소 지정 -->
 		<form-login default-target-url="/" />
 		
 		<!-- 로그아웃 주소지정 및 로그아웃 성공시 주소 지정 -->
-		<logout logout-url="/logout" logout-success-url="/" />
+		<logout logout-url="/logout" logout-success-url="/" 
+				delete-cookies="JSESSIONID,SPRING_SECURITY_REMEMBER_ME_COOKIE"/>
 		
 		<!-- 다중 로그인 방지 -->
 		<session-management>
