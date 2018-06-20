@@ -1,4 +1,4 @@
-package com.kh.myapp;
+package com.kh.myapp.test.member;
 
 import java.util.List;
 

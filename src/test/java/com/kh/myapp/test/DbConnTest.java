@@ -1,4 +1,4 @@
-package com.kh.myapp;
+package com.kh.myapp.test;
 
 import java.sql.Connection;
 import java.sql.SQLException;

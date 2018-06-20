@@ -90,9 +90,8 @@ th { width: 100px }
 	<p style="text-align: right"><a href="/bbs/replyForm?reqPage=${param.reqPage}&bNum=${view.BNum}" class="btn btn-primary">답글</a></p>
 
   	</form>
-	<%-- <jsp:include page="reply.jsp" /> --%>
+	<jsp:include page="reply.jsp" />
 </div>
-
 
 
 </body>

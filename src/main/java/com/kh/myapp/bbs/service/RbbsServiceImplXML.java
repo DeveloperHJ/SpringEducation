@@ -1,6 +1,5 @@
 package com.kh.myapp.bbs.service;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.myapp.bbs.dao.RbbsDAO;
 import com.kh.myapp.bbs.dto.RbbsDTO;
+import com.kh.myapp.util.RecordCriteria;
 
 @Service
 public class RbbsServiceImplXML implements RbbsService {
@@ -18,60 +18,53 @@ public class RbbsServiceImplXML implements RbbsService {
 	RbbsDAO rs;
 	
 	@Override
-	public void write(RbbsDTO rBbsdto) {
+	public void write(RbbsDTO rBbsdto) throws Exception {
+		rs.write(rBbsdto);
 	}
 
 	@Override
-	public List<RbbsDTO> list(int bNum) {
-		return null;
+	public List<RbbsDTO> list(int bNum) throws Exception {
+		return rs.list(bNum);
 	}
 
 	@Override
-	public List<RbbsDTO> list(int bNum, int startRecord, int endRecord) {
-		return null;
+	public List<RbbsDTO> list(int bNum, RecordCriteria recordCriteria) throws Exception {
+		return rs.list(bNum, recordCriteria);
 	}
 
 	@Override
-	public RbbsDTO view(int rNum) {
-		return null;
+	public void update(RbbsDTO rBbsdto) throws Exception {
+		rs.update(rBbsdto);
 	}
 
 	@Override
-	public void update(int rNum, RbbsDTO rBbsdto) {
+	public void delete(int rNum) throws Exception {
+		rs.delete(rNum);
 	}
 
 	@Override
-	public void delete(int rNum) {
+	public Integer replyTotalRec(int bNum) throws Exception {
+		return rs.replyTotalRec(bNum);
 	}
 
 	@Override
-	public void replyTotalRec(int bNum) {
+	public RbbsDTO oriInform(int bNum) throws Exception {
+		return rs.oriInform(bNum);
 	}
 
 	@Override
-	public List<RbbsDTO> list(int startRecord, int endRecord, String searchType, String keyword) {
-		return null;
+	public void reReply(RbbsDTO rbbsdto) throws Exception {
+		rs.reReply(rbbsdto);
 	}
 
 	@Override
-	public void searchTotalRec(String searchType, String keyword) {
+	public void updateStep(int rGroup, int rStep) throws Exception {
+		rs.updateStep(rGroup, rStep);
 	}
 
 	@Override
-	public RbbsDTO oriInform(String bNum) {
-		return null;
-	}
-
-	@Override
-	public void reReply(String oriRNum, RbbsDTO rbbsdto) {
-	}
-
-	@Override
-	public void updateStep(int rGroup, int rStep) {
-	}
-
-	@Override
-	public void goodOrBad(int rNum, String goodOrBad) {
+	public void goodOrBad(int rNum, String goodOrBad) throws Exception {
+		rs.goodOrBad(rNum, goodOrBad);
 	}
 
 }

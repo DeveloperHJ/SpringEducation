@@ -15,74 +15,76 @@ import com.kh.myapp.util.RecordCriteria;
 @Repository
 public class BbsDAOImplXML implements BbsDAO {
 	
+	private static final String NAMESPACE = "com.kh.myapp.bbs.dao.BbsDAO.";
+	
 	@Autowired
 	private SqlSession sqlSession;
-
 	
 	@Override
 	public void write(BbsDTO bbsdto) throws Exception {
-		sqlSession.insert("insert", bbsdto);
+		sqlSession.insert(NAMESPACE + "insert", bbsdto);
 	}
 
 	@Override
 	public List<BbsDTO> list(RecordCriteria recordCriteria) throws Exception {
-		return sqlSession.selectList("listPageCri", recordCriteria);
+		return sqlSession.selectList(NAMESPACE + "listPageCri", recordCriteria);
 	}
 
 	@Override
 	public BbsDTO view(int bNum) throws Exception {
 		updateHit(bNum);
-		return sqlSession.selectOne("view", bNum);
+		return sqlSession.selectOne(NAMESPACE + "view", bNum);
 	}
 
 	@Override
 	public void updateHit(int bNum) throws Exception {
-		sqlSession.update("updateHit", bNum);
+		System.out.println("updateHit!");
+		sqlSession.update(NAMESPACE + "updateHit", bNum);
 	}
 
 	@Override
 	public void update(BbsDTO bbsdto) throws Exception {
-		sqlSession.update("update", bbsdto);
+		sqlSession.update(NAMESPACE + "update", bbsdto);
 	}
 
 	@Override
 	public void delete(int bNum) throws Exception {
-		sqlSession.delete("delete", bNum);
+		sqlSession.delete(NAMESPACE + "delete", bNum);
 	}
 
 	
 	@Override
 	public BbsDTO replyView(int bNum) throws Exception {
-		return sqlSession.selectOne("replyView", bNum);
+		return sqlSession.selectOne(NAMESPACE + "replyView", bNum);
 	}
 
 	@Override
 	public void reply(BbsDTO bbsdto) throws Exception {
 		updateStep(bbsdto);
 		
-		sqlSession.insert("reply", bbsdto);
+		sqlSession.insert(NAMESPACE + "reply", bbsdto);
 	}
 
 	@Override
 	public void updateStep(BbsDTO bbsdto) throws Exception {
 		System.out.println("updateStep" + bbsdto.toString());
-		sqlSession.update("updateStep", bbsdto);
+		sqlSession.update(NAMESPACE + "updateStep", bbsdto);
 	}
 
 	@Override
 	public int totalRec() throws Exception {
-		return sqlSession.selectOne("totalRec");
+		return sqlSession.selectOne(NAMESPACE + "totalRec");
 	}
 
 	
 	@Override
 	public List<BbsDTO> list(FindCriteria findCriteria) throws Exception {
-		return sqlSession.selectList("listFindCri", findCriteria);
+		return sqlSession.selectList(NAMESPACE + "listFindCri", findCriteria);
 	}
 
 	@Override
 	public int searchTotalRec(FindCriteria findCriteria) throws Exception {
-		return sqlSession.selectOne("searchTotalRec", findCriteria);
+		return sqlSession.selectOne(NAMESPACE + "searchTotalRec", findCriteria);
 	}
 
 

@@ -25,12 +25,12 @@ public class RbbsDAOImplXML implements RbbsDAO {
 	}
 
 	@Override
-	public List<RbbsDTO> list(int bnum) throws Exception {
+	public List<RbbsDTO> list(Integer bnum) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "listAll", bnum);
 	}
 
 	@Override
-	public List<RbbsDTO> list(int bnum, RecordCriteria recordCriteria) throws Exception {
+	public List<RbbsDTO> list(Integer bnum, RecordCriteria recordCriteria) throws Exception {
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("bnum", bnum);
@@ -45,33 +45,46 @@ public class RbbsDAOImplXML implements RbbsDAO {
 	}
 
 	@Override
-	public void delete(int rnum) throws Exception {
+	public void delete(Integer rnum) throws Exception {
 		sqlSession.delete(NAMESPACE + "delete", rnum);
 	}
 
 	@Override
-	public Integer replyTotalRec(int bnum) {
+	public Integer replyTotalRec(Integer bnum) {
 		return sqlSession.selectOne(NAMESPACE + "replyTotalRec", bnum);
 	}
 
 	@Override
-	public RbbsDTO oriInform(int rnum) throws Exception {
+	public RbbsDTO oriInform(Integer rnum) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "replyView", rnum);
 	}
 
 	@Override
 	public void reReply(RbbsDTO rbbsdto) throws Exception {
+		System.out.println("reReply");
+		
 		// 원댓글 정보 가져오기 
 		RbbsDTO rbbsOrgDTO = oriInform(rbbsdto.getRnum());
 		
+		rbbsdto.setBnum(rbbsOrgDTO.getBnum());
+		rbbsdto.setRgroup(rbbsOrgDTO.getRgroup());
+		rbbsdto.setRstep(rbbsOrgDTO.getRstep());
+		rbbsdto.setRindent(rbbsOrgDTO.getRindent());
+		
 		// 이전 댓글 step 업데이트 
 		updateStep(rbbsOrgDTO.getRgroup(), rbbsOrgDTO.getRstep());
+		
+		System.out.println("rbbsOrgDTO : " + rbbsOrgDTO.toString());
+		System.out.println("rbbsdto : " + rbbsdto.toString());
+		
 		
 		sqlSession.insert(NAMESPACE + "reply", rbbsdto);
 	}
 
 	@Override
-	public void updateStep(int rGroup, int rStep) throws Exception {
+	public void updateStep(Integer rGroup, Integer rStep) throws Exception {
+		System.out.println("updateStep!");
+		
 		Map<String, Object> map = new HashMap<>();
 		map.put("rgroup", rGroup);
 		map.put("rstep", rStep);
@@ -80,12 +93,12 @@ public class RbbsDAOImplXML implements RbbsDAO {
 	}
 
 	@Override
-	public void goodOrBad(int rNum, String goodOrBad) throws Exception {
+	public void goodOrBad(Integer rnum, String goodOrBad) throws Exception {
 		Map<String, Object> map = new HashMap<>();
-		map.put("rnum", rNum);
+		map.put("rnum", rnum);
 		map.put("goodOrBad", goodOrBad);
 		
-		sqlSession.update(NAMESPACE + "update", map);
+		sqlSession.update(NAMESPACE + "goodOrBad", map);
 	}
 
 }

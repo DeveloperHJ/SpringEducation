@@ -1,4 +1,4 @@
-package com.kh.myapp;
+package com.kh.myapp.test.bbs;
 
 import java.util.List;
 
@@ -72,14 +72,28 @@ private static final Logger logger = Logger.getLogger(RbbsTest.class);
 		logger.info(rs.oriInform(1708).toString());
 	}
 	
-	// 보류, 불러오는 댓글, 작성 리댓으로 코드 수정해야 됨. 
 	@Test @Disabled
 	void reply() throws Exception {
+		rdto.setRnum(1708);
 		rdto.setRid("admin@kh.com");
-		rdto.setBnum(1781);
 		rdto.setRname("관리자");
-		rdto.setRcontent("리댓 테스트");
-		rdto.setRgroup(0);
+		rdto.setRcontent("1708 댓글에 리댓 테스트");
+		
+		rs.reReply(rdto);
 	}
-
+	
+	@Test @Disabled
+	void reRply() throws Exception {
+		rdto.setRnum(1744);
+		rdto.setRid("admin@kh.com");
+		rdto.setRname("관리자");
+		rdto.setRcontent("1744 리리댓에 또 리댓 테스트");
+		
+		rs.reReply(rdto);
+	}
+	
+	@Test
+	void goodOrBad() throws Exception {
+		rs.goodOrBad(1708, "good");
+	}
 }

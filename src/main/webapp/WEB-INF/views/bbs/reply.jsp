@@ -6,17 +6,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/Webedu/public/bootstrap/dist/css/bootstrap.css">
-<script src="/Webedu/public/jquery/jquery-3.3.1.js"></script>
-<script src="/Webedu/public/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="/webjars/jquery/3.3.1/dist/jquery.js"></script>
+  <link rel="stylesheet" href="/webjars/bootstrap/4.1.0/css/bootstrap.css">
+  <script src="/webjars/jquery/3.3.1/dist/jquery.js"></script>
+  <script src="/webjars/bootstrap/4.1.0/js/bootstrap.js"></script>
 <title>Insert title here</title>
 <style>
 body { padding: 1px; }
 </style>
 <script>
 
-//var bNum = 1781;
-var bNum = ${view.bNum};
+var bnum = 1781;
+//var bnum = ${view.BNum};
 var reReqPage = 1;
 
 $(function() {
@@ -30,17 +31,17 @@ $(function() {
 	//좋아요 완료
  	$("#reply").on("click", "#goodBtn", function() {
  		var li = $(this).parent().parent();
- 		var rNum = li.attr("data-rNum");
+ 		var rnum = li.attr("data-rnum");
 		var good = "good";
 		
-		console.log(rNum);
+		console.log(rnum);
 		
 		$.ajax({
-			type: "POST",
-			url: "/Webedu/rbbs/good",
+			type: "PUT",
+			url: "/rbbs/good",
 			dataType: "text",
 			data: {
-				rNum : rNum, 
+				rnum : rnum, 
 				goodOrBad : good
 			},
 			success: function(result){
@@ -55,15 +56,15 @@ $(function() {
 	//별로 완료
 	$("#reply").on("click", "#badBtn", function() {
 		var li = $(this).parent().parent();
- 		var rNum = li.attr("data-rNum");
+ 		var rnum = li.attr("data-rnum");
 		var bad = "bad";
 		
 		$.ajax({
-			type: "POST",
-			url: "/Webedu/rbbs/bad",
+			type: "PUT",
+			url: "/rbbs/bad",
 			dataType: "text",
 			data: {
-				rNum : rNum, 
+				rnum : rnum, 
 				goodOrBad : bad
 			},
 			success: function(result){
@@ -85,18 +86,18 @@ $(function() {
 	// 리댓 달기 
 	$("#reply").on("click", "#reReplyOkBtn", function() {
 		var li = $(this).parent().parent().parent().parent();
- 		var rNum = li.attr("data-rNum");
+ 		var rnum = li.attr("data-rnum");
  		var reReplyWriter = $("#reReplyWriter", li).val();
 		var reReplyContent = $("#reReplyContent", li).val();
 		
-		console.log(rNum);
+		console.log(rnum);
 		
 		$.ajax({
 			type: "POST",
-			url: "/Webedu/rbbs/reReply",
+			url: "/rbbs/reReply",
 			dataType: "text",
 			data: {
-				rNum : rNum, 
+				rnum : rnum, 
 				rName : reReplyWriter, 
 				rContent : reReplyContent
 			},
@@ -119,18 +120,18 @@ $(function() {
 	// 댓글 수정
 	$("#reply").on("click", "#reModiOkBtn", function() {
 		var li = $(this).parent().parent().parent().parent();
- 		var rNum = li.attr("data-rNum");
+ 		var rnum = li.attr("data-rnum");
 		var modiContent = $("#reModiContent", li).val();
 		
-		console.log(rNum);
+		console.log(rnum);
  		console.log(modiContent);
 
 		$.ajax({
-			type:"POST",
-			url:"/Webedu/rbbs/modify",
+			type:"PUT",
+			url:"/rbbs/modify",
 			dataType: "text",
 			data: {
-				rNum: rNum,
+				rnum: rnum,
 				rContent: modiContent
 			},
 			success:function(result){
@@ -145,14 +146,14 @@ $(function() {
 	// 댓글 삭제
 	$("#reply").on("click", "#reDeleteBtn", function() {
 		var li = $(this).parent().parent();
- 		var rNum = li.attr("data-rNum");
+ 		var rnum = li.attr("data-rnum");
 		
 		$.ajax({
-			type:"POST",
-			url:"/Webedu/rbbs/delete",
+			type:"DELETE",
+			url:"/rbbs/delete",
 			dataType: "text",
 			data: {
-				rNum: rNum,
+				rnum: rnum,
 			},
 			success:function(result){
 				replyList(reReqPage);
@@ -171,13 +172,13 @@ $(function() {
 		$.ajax
 		({
 			type:"POST",
-			url:"/Webedu/rbbs/write",
+			url:"/rbbs/write",
 			dataType: "text",
-			data: {
-				bNum : bNum,
-				rName: writer,
-				rContent: replyContent
-			},
+			data: JSON.string({
+				bnum : bnum,
+				rname: writer,
+				rcontent: replyContent
+			}),
 			success:function(result){
 				replyList(reReqPage);
 			},
@@ -203,16 +204,16 @@ function replyList(reReqPage) {
 
 	$.ajax({
 		type: "GET",
-		url: "/Webedu/rbbs/list?bNum="+bNum+"&reReqPage="+reReqPage,
+		url: "/rbbs/map/"+bnum+"/"+reReqPage,
 		dataType: "json",
 		success: function(data){
 			console.log(data);
-			console.log(data.result);
+			console.log(data.item);
 			console.log(data.pageCriteria);
-			$.each(data.result, function(idx, rec){
+			$.each(data.item, function(idx, rec){
 				console.log(rec);
 				console.log(rec.rnum);
-				/* str += "<li data-rNum='"+rec.rnum+"'>"
+				/* str += "<li data-rnum='"+rec.rnum+"'>"
 					+ rec.cdate + " | "
 					+ rec.content + " | "
 					+ rec.name + " | "
@@ -220,18 +221,18 @@ function replyList(reReqPage) {
 					+ rec.bad + " | "
 					+ "<button id='infoBtn'>정보</button>"
 					+ "</li>"; */
-				str += "<div data-rNum='"+rec.rnum+"'>"
-					+ "<label id='nameLb' for='content'><b>"+ rec.name +"</b></label>&nbsp"
-					+ "<label id='cdateLb' for='content'>&nbsp"+ rec.cdate +"</label>&nbsp"
+				str += "<div data-rnum='"+rec.rnum+"'>"
+					+ "<label id='nameLb' for='content'><b>"+ rec.rname +"</b></label>&nbsp"
+					+ "<label id='cdateLb' for='content'>&nbsp"+ rec.rcdate +"</label>&nbsp"
 					
 					+ "<div style='float: right;'>"
 					+ "<button id='goodBtn' class='btn btn-outline-danger btn-sm'>Good&nbsp"
-					+ "<span class='badge badge-danger badge-pill'>"+ rec.good +"</span></button>&nbsp"
+					+ "<span class='badge badge-danger badge-pill'>"+ rec.rgood +"</span></button>&nbsp"
 					+ "<button id='badBtn' class='btn btn-outline-warning btn-sm'>Bad&nbsp"
-					+ "<span class='badge badge-warning badge-pill'>"+ rec.bad +"</span></button>&nbsp"
+					+ "<span class='badge badge-warning badge-pill'>"+ rec.rbad +"</span></button>&nbsp"
 					+ "</div>"
 					
-					+ "<li id='reContent' style='list-style: none;'>"+ rec.content +"</li>"
+					+ "<li id='reContent' style='list-style: none;'>"+ rec.rcontent +"</li>"
 					
 					+ "<div class='btn-group' role='group' aria-label='Basic example' id='reViewMode' style='float: right; padding:1px;'>"
 					+ "<button id='reReplyBtn' class='btn btn-outline-primary btn-sm'>답댓글</button>&nbsp"
@@ -241,7 +242,7 @@ function replyList(reReqPage) {
 					
 					+ "<div id='reModiDiv' class='row' style='padding: 1px; display:none;'>"
 					+ "<div class='col'>"
-					+ "<textarea id='reModiContent' cols='50' rows='3' class='form-control'>" + rec.content + "</textarea>"
+					+ "<textarea id='reModiContent' cols='50' rows='3' class='form-control'>" + rec.rcontent + "</textarea>"
 					+ "<div style='float: right'>"
 					+ "<button id='reModiOkBtn' class='btn btn-success btn-sm'>완료</button><br />"
 					+ "</div>"
@@ -299,6 +300,7 @@ function showPageList(pageCriteria){
 </head>
 <body>
 
+ <div class="container">
  <form>
   <div class="row" style="padding: 1px">
     <div class="col" id="replyInfo">
@@ -332,5 +334,7 @@ function showPageList(pageCriteria){
 	
 </ul>
 </nav>
+ </div>
+
 </body>
 </html>

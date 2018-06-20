@@ -45,13 +45,13 @@
 		values (rbbsnum_seq.nextval, #{rid}, #{bnum}, #{rname}, #{rcontent}, #{rgroup}, #{rstep}+1, #{rindent}+1)
 	</insert>
 	
-	<update id="goodOrBad">
+	<update id="goodOrBad" parameterType="MAP">
 		<choose>
 			<when test="goodOrBad == 'good'">
-				update replybbs set rgood = rgood + 1 where rnum = #{rnum}
+				update replybbs set rgood=rgood+1 where rnum = #{rnum}
 			</when>
 			<when test="goodOrBad == 'bad'">
-				update replybbs set rbad = rbad + 1 where rnum = #{rnum}
+				update replybbs set rbad=rbad+1 where rnum = #{rnum}
 			</when>
 		</choose>
 	</update>

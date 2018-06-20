@@ -1,4 +1,4 @@
-package com.kh.myapp;
+package com.kh.myapp.test.bbs;
 
 
 import java.util.List;

@@ -30,7 +30,6 @@ public class BbsController {
 	
 	@Autowired
 	@Qualifier("bbsServiceImplXML")
-//	@Qualifier("bbsDAOImplXML")
 	private BbsService bs;
 	
 	//게시글 작성 페이지
@@ -139,5 +138,10 @@ public class BbsController {
 		bs.update(bbsdto);
 		model.addAttribute("view", bbsdto);
 		return "redirect:/bbs/view?bNum="+bNum;
+	}
+	
+	@RequestMapping(value="/replyPage")
+	public String replyPage() {
+		return "/bbs/reply";
 	}
 }

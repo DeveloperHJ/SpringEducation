@@ -1,6 +1,4 @@
-package com.kh.myapp;
-
-import java.util.List;
+package com.kh.myapp.test.member;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,9 +10,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.kh.myapp.member.service.MemberService;
-import com.kh.myapp.member.vo.MemberVO;
-
-import jdk.nashorn.internal.ir.annotations.Ignore;
 
 //Junit4 버전에서 Spring framework에서 테스트하는 환경을 가져가겠다.
 //@RunWith(SpringJUnit4ClassRunner.class)	
