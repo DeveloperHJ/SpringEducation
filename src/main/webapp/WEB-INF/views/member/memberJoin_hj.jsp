@@ -47,57 +47,63 @@ $(function(){
 <jsp:include page="../navbar.jsp" />
 
 <section>
-  <div class="py-5">
+  <div class="py-5" style="background-image: url(&quot;https://pingendo.github.io/templates/sections/assets/form_red.jpg&quot;);">
     <div class="container">
-      <div class="row" >
-        <div class="col-lg-7 align-self-center text-lg-left text-center">
-          <h1 class="mb-0 mt-4 display-3">Spring Framework</h1>
-          <p class="mb-5 lead">Kim Hyeonjeong</p>
+      <div class="row">
+        <div class="align-self-center col-md-6 text-white">
+          <h1 class="text-center text-md-left display-3">Book a table</h1>
+          <p class="lead">Why waiting if you can do it online?</p>
         </div>
-        <div class="col-lg-5 p-3">
-
-       	<form:form class="p-4 bg-dark-opaque" modelAttribute="memberVO" action="/member/memberJoinOK" method="post">
-       		<h2>Create Account</h2>
-           	<div class="form-group">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body p-5">
+              <h3 class="pb-3">Make a reservation</h3>
+              <form:form modelAttribute="memberVO" action="/member/memberJoinOK" method="post">
+              <h4 class="center">Create Account</h4>
+                <div class="form-group">
                   <label>Name</label>
                   <form:input path="name" class="form-control" placeholder="Your name, please"/>
 				  <form:errors path="name" cssClass="errmsg" />
-            </div>
-            <div class="form-group">
+                  </div>
+                <div class="form-group">
                   <label>ID</label>
                   <form:input path="id" class="form-control" placeholder="Your id, please"/>
 				  <form:errors path="id" cssClass="errmsg" />
-			</div>
-            <div class="form-group">
+				</div>
+                <div class="form-group">
                   <label>Password</label>
                   <form:password path="passwd" class="form-control" placeholder="Your password, please"/>
 				  <form:errors path="passwd" cssClass="errmsg" />
-			</div>
-            <div class="form-group">
+				</div>
+                <div class="form-group">
                   <label>Check Password</label>
                   <input type="password" name="password" class="form-control" placeholder="Check password"/>
 				  <span id="passwordErr" class="errmsg"></span>
-			</div>
-            <div class="form-group">
+				</div>
+                <div class="form-group">
                   <label>birth</label>
                   <form:input path="birth" class="form-control" placeholder="Your birth, please"/>
 				  <form:errors path="birth" cssClass="errmsg" />
-			</div>
-            <div class="form-group">
+				</div>
+                <div class="form-group">
                   <label>phone</label>
                   <form:input path="name" class="form-control" placeholder="Your phone, please"/>
 				  <form:errors path="name" cssClass="errmsg" />
-			</div>
-            <div class="form-group">
-                  <label>gender</label><br>
+				</div>
+                <div class="form-group">
+                  <label>gender</label>
                   <form:radiobutton path="gender" value="W" /><span>여</span>
                   <form:radiobutton path="gender" value="M" /><span>남</span>
                   <form:errors path="gender" cssClass="errmsg" />
+                </div>
+        		<p>
+		            <button class="btn mt-2 btn-outline-dark" id="joinBtn">가입</button>
+					<button class="btn mt-2 btn-outline-dark" id="joinCancelBtn">취소</button>
+					<button class="btn mt-2 btn-outline-dark" id="joinClearBtn">초기화</button>
+				</p>
+              </form:form>
             </div>
-          	<button class="btn mt-4 btn-outline-primary p-2" id="joinBtn">가입</button>
-			<button class="btn mt-4 btn-outline-primary p-2" id="joinCancelBtn">취소</button>
-			<button class="btn mt-4 btn-outline-primary p-2" id="joinClearBtn">초기화</button>
-        </form:form>
+          </div>
         </div>
       </div>
     </div>

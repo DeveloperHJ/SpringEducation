@@ -2,6 +2,8 @@ package com.kh.myapp.bbs.dto;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +19,9 @@ public class RbbsDTO {
 	private int bnum;					// 원글번호 
 	private String rid;				// 작성자ID
 	private String rname;			// 작성자이름
+	@JsonFormat(pattern="MM/dd/yyyy")
 	private Date rcdate; 			// 작성일시 
+	@JsonFormat(pattern="MM/dd/yyyy")
 	private Date rudate; 			// 수정일시 
 	private String rcontent;	// 댓글내용
 	private int rgood;				// 좋아요

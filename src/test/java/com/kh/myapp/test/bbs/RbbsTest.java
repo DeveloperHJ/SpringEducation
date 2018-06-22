@@ -52,8 +52,8 @@ private static final Logger logger = Logger.getLogger(RbbsTest.class);
 	
 	@Test @Disabled
 	void update() throws Exception {
-		rdto.setRnum(1723);
-		rdto.setRcontent("댓글 테스트1 수정");
+		rdto.setRnum(1784);
+		rdto.setRcontent("테스드 댓 수정");
 		rs.update(rdto);
 	}
 
@@ -92,7 +92,7 @@ private static final Logger logger = Logger.getLogger(RbbsTest.class);
 		rs.reReply(rdto);
 	}
 	
-	@Test
+	@Test @Disabled
 	void goodOrBad() throws Exception {
 		rs.goodOrBad(1708, "good");
 	}

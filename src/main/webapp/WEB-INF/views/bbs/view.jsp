@@ -33,7 +33,7 @@ th { width: 100px }
 		$("#delete").click(function() {
 			msg = "게시물을 삭제하시겠습니까?";
  			if(confirm(msg)!=0) { // yes 클릭
-				location.href="/bbs/delete?reqPage=${recordCriteria.reqPage}&bNum=${view.BNum}";
+				location.href="/bbs/delete?reqPage=${param.reqPage}&bnum=${view.BNum}";
 			} 
 		});
 	}); 
@@ -58,7 +58,10 @@ th { width: 100px }
   </div>
   
   <div id='modifyMode' style="text-align: right; display: none;">
-  <input type="hidden" name="BNum" value="${view.BNum}" />
+  <input type="hidden" name="bNum" value="${view.BNum}" />
+  <input type="hidden" name="bGroup" value="${view.BGroup}" />
+  <input type="hidden" name="bStep" value="${view.BStep}" />
+  <input type="hidden" name="bIndent" value="${view.BIndent}" />
   <input id="submit" class="btn btn-primary" type="submit" value="완료">
   <button id="cancel" type="button" class="btn btn-secondary">취소</button>
   <a href="/bbs/list?reqPage=${param.reqPage}" class="btn btn-primary btn active" role="button" aria-pressed="true">목록</a>
@@ -68,7 +71,7 @@ th { width: 100px }
  	<table class="table table-hover">
 		<tr>
 			<th class="th-dark" scope="col">작성자</th>
-			<td><input type="text" readonly="readonly" class="form-control" name="BName" value="${view.BName}"></td>
+			<td><input type="text" readonly="readonly" class="form-control" name="bName" value="${view.BName}"></td>
 		</tr>
 		<tr>
 			<th class="th-dark" scope="col">작성일</th>
@@ -80,16 +83,17 @@ th { width: 100px }
 		</tr>
 		<tr>
 			<th class="th-dark" scope="col">제목</th>
-			<td><input id="write" type="text" readonly="readonly" class="form-control" name="BTitle" value="${view.BTitle}"></td>
+			<td><input id="write" type="text" readonly="readonly" class="form-control" name="bTitle" value="${view.BTitle}"></td>
 		</tr>
 		<tr>
 			<th class="th-dark" scope="col">내용</th>
-			<td><input id="write" type="text" readonly="readonly" class="form-control" name="BContent" value="${view.BContent}"></td>
+			<td><input id="write" type="text" readonly="readonly" class="form-control" name="bContent" value="${view.BContent}"></td>
 		</tr>
 	</table> 
-	<p style="text-align: right"><a href="/bbs/replyForm?reqPage=${param.reqPage}&bNum=${view.BNum}" class="btn btn-primary">답글</a></p>
-
+	<p style="text-align: right"><a href="/bbs/replyForm?reqPage=${param.reqPage}&bnum=${view.BNum}" class="btn btn-primary">답글</a></p>
   	</form>
+  	
+  	<!-- 댓글 페이지 -->
 	<jsp:include page="reply.jsp" />
 </div>
 

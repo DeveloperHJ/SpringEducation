@@ -39,92 +39,61 @@ $(function(){
 <jsp:include page="../navbar.jsp" />
 
 <section>
- <div class="section container" style="margin-top: 3%;">
-  <div class="row">
-    <div class="col s12 m6 offset-m3">
-      <div class="card login-wrapper">
-        <div class="card-content">
+   <div class="py-5">
+    <div class="container">
+      <div class="row" >
+        <div class="col-lg-7 align-self-center text-lg-left text-center">
+          <h1 class="mb-0 mt-4 display-3">Spring Framework</h1>
+          <p class="mb-5 lead">Kim Hyeonjeong</p>
+        </div>
+        <div class="col-lg-5 p-3">
 
-		<form:form modelAttribute="memberVO" action="/member/memberModifyOK" method="post">
-            <h4 class="center">Account Information</h4>
-
-            <div class="input-field">
-              <label for="id">
-                Email
-              </label>
-              	<form:input path="id" readonly="true" />
-				<form:errors path="id" cssClass="errmsg" />	
+		<form:form class="p-4 bg-dark-opaque" modelAttribute="memberVO" action="/member/memberModifyOK" method="post">
+       		<h2>Account Information</h2>
+           	<div class="form-group">
+                <label>Name</label>
+                <form:input path="name" readonly="true" class="form-control" />
+		  		<form:errors path="name" cssClass="errmsg" />	
             </div>
-            
-            <div class="input-field">
-              <label for="name" class="">
-                Name
-              </label>
-              	<form:input path="name" />
-				<form:errors path="name" cssClass="errmsg" />
-            </div>
-
-            <div class="input-field">
-              <label for="passwd">
-                Password
-              </label>
-				<form:password path="passwd" />
+            <div class="form-group">
+                <label>ID</label>
+              	<form:input path="id" class="form-control" />
+				<form:errors path="id" cssClass="errmsg" />
+			</div>
+            <div class="form-group">
+                <label>Password</label>
+				<form:password path="passwd" class="form-control" />
 				<form:errors path="passwd" cssClass="errmsg" />
-            </div>
-            
-            <div class="input-field">
-              <label for="password">
-                Check Password
-              </label>
-              	<input type="password" name="password" />
+			</div>
+            <div class="form-group">
+                <label>Check Password</label>
+              	<input type="password" name="password" class="form-control" />
 				<span id="passwordErr" class="errmsg"></span>
+			</div>
+            <div class="form-group">
+                  <label>birth</label>
+                  <form:input path="birth" class="form-control" />
+				  <form:errors path="birth" cssClass="errmsg" />
+			</div>
+            <div class="form-group">
+                  <label>phone</label>
+                  <form:input path="name" class="form-control" />
+				  <form:errors path="name" cssClass="errmsg" />
+			</div>
+            <div class="form-group">
+                  <label>gender</label><br>
+                  <form:radiobutton path="gender" value="W" /><span>여</span>
+                  <form:radiobutton path="gender" value="M" /><span>남</span>
+                  <form:errors path="gender" cssClass="errmsg" />
             </div>
             
-            <div class="input-field">
-              <label for="birth">
-                Birth
-              </label>
-				<form:input path="birth" />
-				<form:errors path="birth" cssClass="errmsg" />
-            </div>
-            
-            <div class="input-field">
-              <label for="phone">
-                Phone
-              </label>
-				<form:input path="phone" />
-				<form:errors path="phone" cssClass="errmsg" />
-            </div>
-            
-              <label for="gender">
-              	Gender
-              </label>
-              <p>
-              <label>
-				<form:radiobutton path="gender" value="W" /><span>여</span>
-			  </label>
-			  <label>
-				<form:radiobutton path="gender" value="M" /><span>남</span>
-			  </label>
-			  <label>
-				<form:errors path="gender" cssClass="errmsg" />
-			  </label>
-			  </p>
-			
-			<br />
-			
-			<p>
-				<button class="waves-effect waves-light btn" id="modifyBtn">수정</button>
-				<button class="waves-effect waves-light btn" id="modifyNoBtn">취소</button>
-			</p>
-			
-          </form:form>
-
+            <button class="btn mt-4 btn-outline-primary p-2" id="modifyBtn">수정</button>
+			<button class="btn mt-4 btn-outline-primary p-2" id="modifyNoBtn">취소</button>
+        </form:form>
         </div>
       </div>
     </div>
   </div>
-</div>
 </section>
 
 </body>

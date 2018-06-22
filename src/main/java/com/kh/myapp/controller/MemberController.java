@@ -34,6 +34,7 @@ public class MemberController {
 	// 가입화면
 	@RequestMapping(value="/memberJoin") // 주소값
 	public void memJoin(Model model) {
+		logger.info("memberJoin...");
 		model.addAttribute("memberVO", new MemberVO());
 	}
 	
@@ -91,6 +92,7 @@ public class MemberController {
 	@RequestMapping(value="/memberList")
 	public String memberList(Model model)
 	{
+		logger.info("memberList");
 		List<MemberVO> alist = memberService.getMemberAll();
 		model.addAttribute("memberVOS", alist);
 		return "/member/memberList";

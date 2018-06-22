@@ -2,9 +2,10 @@ package com.kh.myapp.bbs.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.kh.myapp.bbs.dto.BbsDTO;
 import com.kh.myapp.util.FindCriteria;
-import com.kh.myapp.util.PageCriteria;
 import com.kh.myapp.util.RecordCriteria;
 
 public interface BbsService {
@@ -19,6 +20,18 @@ public interface BbsService {
 	 * @throws Exception
 	 */
 	List<BbsDTO> list(RecordCriteria recordCriteria) throws Exception;
+	
+	/** 
+	 * 검색한 내용의 게시물 list 출력 
+	 * @param FindCriteria findCriteria
+	 * @return ArrayList BbsDTO type 
+	 */
+	List<BbsDTO> list(FindCriteria findCriteria) throws Exception;
+	
+	/**
+	 * list에 request 반영
+	 */
+	void list(HttpServletRequest request) throws Exception;
 
 	// 글 내용 가져오기, 조회수 증가 
 	BbsDTO view(int bNum) throws Exception;
@@ -41,15 +54,6 @@ public interface BbsService {
 	// 전체 게시물 수 구하기 
 	int totalRec() throws Exception;
 
-	
-	/** 
-	 * 검색한 내용의 게시물 list 출력 
-	 * @param FindCriteria findCriteria
-	 * @return ArrayList BbsDTO type 
-	 */
-	List<BbsDTO> list(FindCriteria findCriteria) throws Exception;
-
-	
 	/**
 	 * 검색 결과 총계
 	 * @param FindCriteria findCriteria

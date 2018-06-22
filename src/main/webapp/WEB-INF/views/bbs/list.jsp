@@ -31,24 +31,18 @@ th, #tdnum, #tdname, #tdhit, #tdcdate { text-align: center }
   <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>
   <br>
 
-  <form action="/bbs/searchList">
-	  
-  	  <div class="input-field col s12 m6">
-	    <select name="searchType" class="browser-default">
-		    <option value="TC" <C:out value="${findCriteria.searchType == 'TC' ? 'selected' : '' }" />>제목+내용</option>
-		    <option value="T" <C:out value="${findCriteria.searchType == 'T' ? 'selected' : '' }" />>제목</option>
-		    <option value="C" <C:out value="${findCriteria.searchType == 'C' ? 'selected' : '' }" />>내용</option>
-		    <option value="W" <C:out value="${findCriteria.searchType == 'W' ? 'selected' : '' }" />>작성자</option>
-	    </select>
-	  </div>
+  <form action="/bbs/list">
+	  <select class="custom-select my-1 mr-sm-2" name="searchType">
+	    <option value="TC" <C:out value="${findCriteria.searchType eq 'TC' ? 'selected' : '' }" />>제목+내용</option>
+	    <option value="T" <C:out value="${findCriteria.searchType eq 'T' ? 'selected' : '' }" />>제목</option>
+	    <option value="C" <C:out value="${findCriteria.searchType eq 'C' ? 'selected' : '' }" />>내용</option>
+	    <option value="W" <C:out value="${findCriteria.searchType eq 'W' ? 'selected' : '' }" />>작성자</option>
+	  </select>
 	
-  	  <div class="input-field col s12 m6">
-        <input name="keyword" placeholder="검색 내용 입력" value="${findCriteria.keyword}">
-      </div>
-<%-- 	  <input class="form-control mr-sm-2" name="keyword" type="search" aria-label="Search" placeholder="검색 내용 입력" 
-	  		 value="${findCriteria.keyword}"> --%>
+	  <input class="form-control mr-sm-2" name="keyword" type="search" aria-label="Search" placeholder="검색 내용 입력" value="${findCriteria.keyword}">
 	  <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" id="search">Search</button>
   </form>
+
 	
   <p style="text-align: right">
   <a href="/bbs/list" class="btn btn-primary btn active" role="button" aria-pressed="true">목록 </a>
@@ -75,9 +69,9 @@ th, #tdnum, #tdname, #tdhit, #tdcdate { text-align: center }
         <td id = "tdtitle">
         	<C:if test="${dto.BIndent > 0}">
         		<C:forEach begin="1" end="${dto.BIndent}">&nbsp;&nbsp;</C:forEach>
-        		RE : 
+        		<img src="/images/icon_reply.gif">
         	</C:if>
-        	<a class="text-dark" href="/bbs/view?${pageCriteria.makeSearchURL(pageCriteria.recordCriteria.reqPage)}&bNum=${dto.BNum}">
+        	<a class="text-dark" href="/bbs/view?${pageCriteria.makeSearchURL(pageCriteria.recordCriteria.reqPage)}&bnum=${dto.BNum}">
         	${dto.BTitle}
         	</a>
         </td>
@@ -118,15 +112,6 @@ th, #tdnum, #tdname, #tdhit, #tdcdate { text-align: center }
 	  </ul>
   </nav> 
 </div>
-   <div class="input-field col s12">
-    <select>
-      <option value="" disabled selected>Choose your option</option>
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-      <option value="3">Option 3</option>
-    </select>
-    <label>Materialize Select</label>
-  </div>
 </body>
 
 </html>

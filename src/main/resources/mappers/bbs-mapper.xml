@@ -17,7 +17,7 @@
 	</select>
 	
 	<select id="view" resultType="BbsDTO">
-		select bnum, btitle, bid, bname, bhit, bcontent, bcdate, budate from bbs 
+		select bnum, btitle, bid, bname, bhit, bcontent, bcdate, budate, bgroup, bstep, bindent from bbs 
 		where bnum = #{bNum}
 	</select>
 	
@@ -34,13 +34,13 @@
 	</update>
 	
 	<select id="replyView" resultType="BbsDTO">
-		select bnum, btitle, bname, bhit, bcontent, bcdate, budate from bbs 
+		select bnum, btitle, bname, bhit, bcontent, bcdate, budate, bgroup, bstep, bindent from bbs 
 		where bnum = #{bNum}
 	</select>
 	
 	<insert id="reply">
-	  	insert into bbs(bnum, btitle, bid, bname, bhit, bcontent, bgroup, bstep, bindent) 
-	  	values (bbsnum_seq.nextval, #{bTitle}, #{bID}, #{bName}, #{bHit}, #{bContent}, #{bNum}, #{bStep}+1, #{bIndent}+1)
+	  	insert into bbs(bnum, btitle, bid, bname, bcontent, bgroup, bstep, bindent) 
+	  	values (bbsnum_seq.nextval, #{bTitle}, #{bID}, #{bName}, #{bContent}, #{bGroup}, #{bStep}, #{bIndent})
 	</insert>
 	
 	<update id="updateStep">
@@ -63,24 +63,18 @@
 		from (select row_number() over (order by bgroup desc, bstep asc) as num, t1.* 
 	    from bbs t1 where bnum > 0 
 
-		<choose>
-			<when test="searchType == 'TC'">
-				and (btitle like '%' || #{keyword} || '%' or bcontent like '%' || #{keyword} || '%')
-			</when>
-			<when test="searchType == 'T'">
-				and bTitle like '%' || #{keyword} || '%'
-			</when>
-			<when test="searchType == 'C'">
-				and bContent like '%' || #{keyword} || '%'
-			</when>
-			<when test="searchType == 'W'">
-				and bname like '%' || #{keyword} || '%'
-			</when>
-			
-			<otherwise>
-			and (btitle like '%' || #{keyword} || '%' or bcontent like #{keyword} or bname like '%' || #{keyword} || '%')
-			</otherwise>
-		</choose>
+		<if test='searchType eq "TC"'>
+			and (btitle like '%' || #{keyword} || '%' or bcontent like '%' || #{keyword} || '%')
+		</if>
+		<if test='searchType eq "T"'>
+			and bTitle like '%' || #{keyword} || '%'
+		</if>
+		<if test='searchType eq "C"'>
+			and bContent like '%' || #{keyword} || '%'
+		</if>
+		<if test='searchType eq "W"'>
+			and bname like '%' || #{keyword} || '%'
+		</if>
 		<!-- f -->
 	
 		
@@ -94,24 +88,19 @@
 		from (select row_number() over (order by bgroup desc, bstep asc) as num, t1.* 
 	    from bbs t1 where bnum > 0 
 
-		<choose>
-			<when test="searchType == 'TC'">
-				and (btitle like '%' || #{keyword} || '%' or bcontent like '%' || #{keyword} || '%')
-			</when>
-			<when test="searchType == 'T'">
-				and bTitle like '%' || #{keyword} || '%'
-			</when>
-			<when test="searchType == 'C'">
-				and bContent like '%' || #{keyword} || '%'
-			</when>
-			<when test="searchType == 'W'">
-				and bname like '%' || #{keyword} || '%'
-			</when>
-			
-			<otherwise>
-			and (btitle like '%' || #{keyword} || '%' or bcontent like #{keyword} or bname like '%' || #{keyword} || '%')
-			</otherwise>
-		</choose>
+		<if test='searchType eq "TC"'>
+			and (btitle like '%' || #{keyword} || '%' or bcontent like '%' || #{keyword} || '%')
+		</if>
+		<if test='searchType eq "T"'>
+			and bTitle like '%' || #{keyword} || '%'
+		</if>
+		<if test='searchType eq "C"'>
+			and bContent like '%' || #{keyword} || '%'
+		</if>
+		<if test='searchType eq "W"'>
+			and bname like '%' || #{keyword} || '%'
+		</if>
+
 		<!-- f -->
 	
 		

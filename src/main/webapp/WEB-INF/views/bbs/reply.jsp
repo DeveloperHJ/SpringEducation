@@ -6,24 +6,39 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="/webjars/jquery/3.3.1/dist/jquery.js"></script>
-  <link rel="stylesheet" href="/webjars/bootstrap/4.1.0/css/bootstrap.css">
-  <script src="/webjars/jquery/3.3.1/dist/jquery.js"></script>
-  <script src="/webjars/bootstrap/4.1.0/js/bootstrap.js"></script>
+<link rel="stylesheet" href="/webjars/bootstrap/4.1.0/css/bootstrap.css">
+<script src="/webjars/bootstrap/4.1.0/js/bootstrap.js"></script>
+<script src="/webjars/jquery/3.3.1/dist/jquery.js"></script>
+
 <title>Insert title here</title>
+
 <style>
 body { padding: 1px; }
 </style>
-<script>
 
-var bnum = 1781;
-//var bnum = ${view.BNum};
+<script>
+// ajax 실행시 마다 http header에 csrf토큰 추가-------------------------
+$(function () {
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+	$(document).ajaxSend(function(e, xhr, options) {
+		xhr.setRequestHeader(header, token);
+	});
+});
+// ---------------------------------------------------------------------
+
+//var bnum = 1781;
+var bnum = ${view.BNum};
 var reReqPage = 1;
 
+// 세션 정보 
+ var login_id = "${user.username}";
+var login_name = "${user.name}"; 
+/* 
+var login_id = "admin@kh.com";
+var login_naem = "관리자"; */
+
 $(function() {
-	// 댓글 수정 양식 숨기기 
-	$("#modifyDiv").hide();
-	
 	// 댓글 목록 가져오기 
 	// replyList();
 	replyList(reReqPage);
@@ -32,18 +47,21 @@ $(function() {
  	$("#reply").on("click", "#goodBtn", function() {
  		var li = $(this).parent().parent();
  		var rnum = li.attr("data-rnum");
-		var good = "good";
 		
 		console.log(rnum);
 		
 		$.ajax({
 			type: "PUT",
-			url: "/rbbs/good",
-			dataType: "text",
-			data: {
-				rnum : rnum, 
-				goodOrBad : good
+			url: "/rbbs/good/"+rnum,
+			headers:{
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "POST"
 			},
+			dataType: "text",
+			data: JSON.stringify({
+				rnum : rnum, 
+				goodOrBad : "good"
+			}),
 			success: function(result){
 				replyList(reReqPage);
 			},
@@ -57,16 +75,19 @@ $(function() {
 	$("#reply").on("click", "#badBtn", function() {
 		var li = $(this).parent().parent();
  		var rnum = li.attr("data-rnum");
-		var bad = "bad";
 		
 		$.ajax({
 			type: "PUT",
-			url: "/rbbs/bad",
-			dataType: "text",
-			data: {
-				rnum : rnum, 
-				goodOrBad : bad
+			url: "/rbbs/bad/"+rnum,
+			headers:{
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "POST"
 			},
+			dataType: "text",
+			data: JSON.stringify({
+				rnum : rnum, 
+				goodOrBad : "bad"
+			}),
 			success: function(result){
 				replyList(reReqPage);
 			},
@@ -87,7 +108,6 @@ $(function() {
 	$("#reply").on("click", "#reReplyOkBtn", function() {
 		var li = $(this).parent().parent().parent().parent();
  		var rnum = li.attr("data-rnum");
- 		var reReplyWriter = $("#reReplyWriter", li).val();
 		var reReplyContent = $("#reReplyContent", li).val();
 		
 		console.log(rnum);
@@ -95,12 +115,17 @@ $(function() {
 		$.ajax({
 			type: "POST",
 			url: "/rbbs/reReply",
-			dataType: "text",
-			data: {
-				rnum : rnum, 
-				rName : reReplyWriter, 
-				rContent : reReplyContent
+			headers:{
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "POST"
 			},
+			dataType: "text",
+			data: JSON.stringify({
+				rnum : rnum, 
+				rid : login_id,
+				rname : login_name, 
+				rcontent : reReplyContent
+			}),
 			success: function(result){
 				replyList(reReqPage);
 			},
@@ -129,11 +154,15 @@ $(function() {
 		$.ajax({
 			type:"PUT",
 			url:"/rbbs/modify",
-			dataType: "text",
-			data: {
-				rnum: rnum,
-				rContent: modiContent
+			headers:{
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "POST"
 			},
+			dataType: "text",
+			data: JSON.stringify({
+				rnum: rnum,
+				rcontent: modiContent
+			}),
 			success:function(result){
 				replyList(reReqPage);
 			},
@@ -150,11 +179,13 @@ $(function() {
 		
 		$.ajax({
 			type:"DELETE",
-			url:"/rbbs/delete",
-			dataType: "text",
-			data: {
-				rnum: rnum,
+			url:"/rbbs/delete/"+rnum,
+			headers:{
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "POST"
 			},
+			dataType: "text",
+
 			success:function(result){
 				replyList(reReqPage);
 			},
@@ -166,17 +197,22 @@ $(function() {
 	
 	// 댓글 작성 클릭 시 수행 로직 
 	$("#replyBtn").click(function() {
-		var writer = $("#writer").val();
 		var replyContent = $("#replyContent").val();
+		alert("등록클릭" + replyContent);
 		
 		$.ajax
 		({
 			type:"POST",
 			url:"/rbbs/write",
+			headers:{
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "POST"
+			},
 			dataType: "text",
-			data: JSON.string({
+			data: JSON.stringify({
 				bnum : bnum,
-				rname: writer,
+				rid : login_id,
+				rname: login_name,
 				rcontent: replyContent
 			}),
 			success:function(result){
@@ -213,16 +249,15 @@ function replyList(reReqPage) {
 			$.each(data.item, function(idx, rec){
 				console.log(rec);
 				console.log(rec.rnum);
-				/* str += "<li data-rnum='"+rec.rnum+"'>"
-					+ rec.cdate + " | "
-					+ rec.content + " | "
-					+ rec.name + " | "
-					+ rec.good + " | "
-					+ rec.bad + " | "
-					+ "<button id='infoBtn'>정보</button>"
-					+ "</li>"; */
-				str += "<div data-rnum='"+rec.rnum+"'>"
-					+ "<label id='nameLb' for='content'><b>"+ rec.rname +"</b></label>&nbsp"
+
+				str += "<div data-rnum='"+rec.rnum+"'>";
+			for(var i=0; i < rec.rindent; i++) {
+				str += "&nbsp;&nbsp;";
+			}	 			
+			if(rec.rindent > 0){
+				str +=	"<img alt='' src='/images/icon_reply.gif'>";
+			}	
+				str += "<label id='nameLb' for='content'><b>"+ rec.rname +"</b></label>&nbsp"
 					+ "<label id='cdateLb' for='content'>&nbsp"+ rec.rcdate +"</label>&nbsp"
 					
 					+ "<div style='float: right;'>"
@@ -231,12 +266,15 @@ function replyList(reReqPage) {
 					+ "<button id='badBtn' class='btn btn-outline-warning btn-sm'>Bad&nbsp"
 					+ "<span class='badge badge-warning badge-pill'>"+ rec.rbad +"</span></button>&nbsp"
 					+ "</div>"
+					+ "<li id='reContent' style='list-style: none;'>";
 					
-					+ "<li id='reContent' style='list-style: none;'>"+ rec.rcontent +"</li>"
-					
-					+ "<div class='btn-group' role='group' aria-label='Basic example' id='reViewMode' style='float: right; padding:1px;'>"
+			for(var i=0; i < rec.rindent; i++) {
+				str += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+			}
+				str += rec.rcontent +"</li>"
+					+ "<div aria-label='Basic example' id='reViewMode' style='float: right; padding:1px;'>"
 					+ "<button id='reReplyBtn' class='btn btn-outline-primary btn-sm'>답댓글</button>&nbsp"
-					+ "<button id='reModifyBtn' class='btn btn-outline-primary btn-sm'>수정</button>&nbsp"
+					+ "<button id='reModifyBtn' class='btn btn-outline-secondary btn-sm'>수정</button>&nbsp"
 					+ "<button id='reDeleteBtn' class='btn btn-outline-secondary btn-sm'>삭제</button>"
 					+ "</div><br></br>"
 					
@@ -251,7 +289,6 @@ function replyList(reReqPage) {
 					
 					+ "<div id='reReplyDiv' class='row' style='padding: 1px; display:none;'>"
 					+ "<div class='col'>"
-					+ "<input type='text' id='reReplyWriter' class='form-control' placeholder='작성자명'>"
 					+ "<textarea id='reReplyContent' cols='50' rows='3' class='form-control' placeholder='답댓글 내용을 입력해주세요.'></textarea>"
 					+ "<div style='float: right'>"
 					+ "<button id='reReplyOkBtn' class='btn btn-success btn-sm'>완료</button><br />"
@@ -263,6 +300,8 @@ function replyList(reReqPage) {
 					+ "<br></br><br />";
 			});
 			$("#reply").html(str);
+			
+			console.log(data.item);
 			
 			//페이지 리스트 호출 
 			showPageList(data.pageCriteria);
@@ -300,13 +339,8 @@ function showPageList(pageCriteria){
 </head>
 <body>
 
+<%-- view reqPage : ${view.reqPage } --%>
  <div class="container">
- <form>
-  <div class="row" style="padding: 1px">
-    <div class="col" id="replyInfo">
-      <input type="text" id="writer" class="form-control" placeholder="작성자명">
-    </div>
-  </div>
   <div class="row" style="padding: 1px">
   	<div class="col">
       <textarea id="replyContent" cols="50" rows="1" class="form-control" placeholder="댓글 내용을 입력해주세요."></textarea>
@@ -318,7 +352,6 @@ function showPageList(pageCriteria){
       <button id="replyBtn" class="btn btn-primary btn active">댓글 등록</button>
     </div>
   </div>
-</form>
 <br></br>
 
 <h4>댓글리스트</h4>
@@ -335,6 +368,5 @@ function showPageList(pageCriteria){
 </ul>
 </nav>
  </div>
-
 </body>
 </html>

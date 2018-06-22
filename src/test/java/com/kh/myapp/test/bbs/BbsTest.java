@@ -87,21 +87,26 @@ class BbsTest {
 	void totalRec_test() {
 		logger.info(bbsdao.totalRec());
 	}
+	*/
 	
 	@Test @Disabled
-	void findList_test() {
-		FindCriteria findCriteria = new FindCriteria(1, 10, "TC", "테스트");
-		List<BbsDTO> list = bbsdao.list(findCriteria);
-		logger.info(list);
+	void findList_test() throws Exception{
+		RecordCriteria rc = new FindCriteria(1, 10, "W", "김현정");
+		List<BbsDTO> list = bbsdao.list(rc);
+		int totalRec = bbsdao.searchTotalRec((FindCriteria)rc);
+		PageCriteria pc = new PageCriteria(rc, totalRec);	
+
+		logger.info(list.toString());
+		logger.info(pc.toString());
 	}
 	
-	@Test 
-	void searchTotalRec_test() {
-		FindCriteria findCriteria = new FindCriteria(1, 10, "TC", "테스트");
+	@Test @Disabled
+	void searchTotalRec_test() throws Exception {
+		FindCriteria findCriteria = new FindCriteria(1, 10, "TC", "제목");
 		logger.info(bbsdao.searchTotalRec(findCriteria));
-	}*/
+	}
 	
-	@Test
+	@Test @Disabled
 	void list_test() {
 		RecordCriteria recordCriteria = new RecordCriteria(1, 10);
 		PageCriteria pageCriteria;
@@ -113,5 +118,19 @@ class BbsTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Test
+	void reply_new() throws Exception {
+		BbsDTO bbsdto = new BbsDTO();
+		bbsdto.setBID("admin@kh.com");
+		bbsdto.setBName("관리자");
+		bbsdto.setBTitle("답글임");
+		bbsdto.setBContent("답글내용");
+		bbsdto.setBGroup(3769);
+		bbsdto.setBStep(0);
+		bbsdto.setBIndent(0);
+		
+		bbsdao.reply(bbsdto);
 	}
 }

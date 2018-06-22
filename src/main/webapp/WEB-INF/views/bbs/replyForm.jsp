@@ -32,10 +32,11 @@ th { width: 100px }
   <br></br>
   <form method="post" action="/bbs/reply">
   <sec:csrfInput />
-  <input type="hidden" name="bNum" value="${bNum}" />
-  <input type="hidden" name="bNum" value="${bGroup}" />
-  <input type="hidden" name="bNum" value="${bStep}" />
-  <input type="hidden" name="bNum" value="${bIndent}" />
+  넘${reply.BNum} 그룹${reply.BGroup} 스텝${reply.BStep} 인덴트${reply.BIndent} 
+  <input type="hidden" name="bNum" value="${reply.BNum}" />
+  <input type="hidden" name="bGroup" value="${reply.BGroup}" />
+  <input type="hidden" name="bStep" value="${reply.BStep}" />
+  <input type="hidden" name="bIntent" value="${reply.BIndent}" />
   <input type="hidden" name="bID" value="${user.username}" />
   <%-- <input type="hidden" name="reqPage" value="${recordCriteria.reqPage}"/> --%>
   

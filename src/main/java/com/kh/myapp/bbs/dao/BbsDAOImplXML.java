@@ -29,6 +29,11 @@ public class BbsDAOImplXML implements BbsDAO {
 	public List<BbsDTO> list(RecordCriteria recordCriteria) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "listPageCri", recordCriteria);
 	}
+	
+	@Override
+	public List<BbsDTO> list(FindCriteria findCriteria) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "listFindCri", findCriteria);
+	}
 
 	@Override
 	public BbsDTO view(int bNum) throws Exception {
@@ -52,7 +57,6 @@ public class BbsDAOImplXML implements BbsDAO {
 		sqlSession.delete(NAMESPACE + "delete", bNum);
 	}
 
-	
 	@Override
 	public BbsDTO replyView(int bNum) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "replyView", bNum);
@@ -62,6 +66,8 @@ public class BbsDAOImplXML implements BbsDAO {
 	public void reply(BbsDTO bbsdto) throws Exception {
 		updateStep(bbsdto);
 		
+		bbsdto.setBStep(bbsdto.getBStep()+1);
+		bbsdto.setBIndent(bbsdto.getBIndent()+1);
 		sqlSession.insert(NAMESPACE + "reply", bbsdto);
 	}
 
@@ -76,16 +82,9 @@ public class BbsDAOImplXML implements BbsDAO {
 		return sqlSession.selectOne(NAMESPACE + "totalRec");
 	}
 
-	
-	@Override
-	public List<BbsDTO> list(FindCriteria findCriteria) throws Exception {
-		return sqlSession.selectList(NAMESPACE + "listFindCri", findCriteria);
-	}
-
 	@Override
 	public int searchTotalRec(FindCriteria findCriteria) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "searchTotalRec", findCriteria);
 	}
-
 
 }

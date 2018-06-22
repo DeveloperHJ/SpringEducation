@@ -5,42 +5,40 @@
 
 <sec:authentication var="user" property="principal" scope="session" />
 
-<nav class="white" role="navigation">
-<div class="container">
-  <div class="nav-wrapper">
-    <a href="/" class="brand-logo">
-    <span class="grey-text text-darken-3">SpringFramework</span></a>
-  	<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons"><span class="grey-text text-darken-3">menu</span></i></a>
-    <ul class="right hide-on-med-and-down">
-      <li><a href="/bbs/list"><span class="grey-text text-darken-3">게시판</span></a></li>
+<div class="container-fluid">
+  <p>Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile-first projects on the web.</p>
+</div>
+
+<nav class="navbar navbar-expand-sm bg-white navbar-light sticky-top">
+  <!-- Brand -->
+  <a class="navbar-brand" href="/">SPRING</a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+		<li class="nav-item"><a href="/bbs/list" class="nav-link">게시판</a></li>
 		<sec:authorize access="isAnonymous()">
-      		<li id="loginOn"><a href="/login/login"><span class="grey-text text-darken-3">로그인</span></a></li>
+			<li class="nav-item" id="loginOn"><a href="/login/login" class="nav-link">로그인</a></li>
 		</sec:authorize>
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
- 	   	 	<li id="myModify"><a href="/member/memberList"><span class="grey-text text-darken-3">회원목록</span></a></li>
- 	   	</sec:authorize>
+			<li class="nav-item" id="myModify"><a href="/member/memberList" class="nav-link">회원목록</a></li>
+		</sec:authorize>
 		<sec:authorize access="isAuthenticated()">
-    	    <li id="myModify"><a href="/member/memberModify/${user.username}"><span class="grey-text text-darken-3">내정보</span></a></li>
-      		<li id="loginOff"><a href="/login/logOut"><span class="grey-text text-darken-3">로그아웃</span></a></li>
-      	</sec:authorize>
+			<li class="nav-item" id="myModify"><a href="/member/memberModify/${user.username}" class="nav-link">내정보</a></li>
+			<li class="nav-item" id="loginOff"><a href="/login/logOut" class="nav-link">로그아웃</a></li>
+		</sec:authorize>
     </ul>
-
-    
-	<ul class="sidenav" id="mobile-demo">
-	    <li><a href=#><span class="grey-text text-darken-3">게시판</span></a></li>
-		  <sec:authorize access="isAnonymous()">
-	    	<li><a href="/login/login"><span class="grey-text text-darken-3">로그인</span></a></li>
-		  </sec:authorize>
-		  <sec:authorize access="hasRole('ROLE_ADMIN')">
-    		<li id="myModify"><a href="/member/memberList"><span class="grey-text text-darken-3">회원목록</span></a></li>
-    	  </sec:authorize>
-		  <sec:authorize access="isAuthenticated()">
-    	    <li id="myModify"><a href="/member/memberModify/"><span class="grey-text text-darken-3">${user.username}내정보</span></a></li>
-	    	<li id="loginOff"><a href="/login/logOut"><span class="grey-text text-darken-3">로그아웃</span></a></li>
-          </sec:authorize>
-	</ul>
-  </div>
-</div>
+  </div> 
+  <form class="form-inline" action="/action_page.php">
+  <input class="form-control mr-sm-2" type="text" placeholder="Search">
+  <button class="btn btn-success" type="submit">Search</button>
+  </form>
+  
 </nav>
 
  

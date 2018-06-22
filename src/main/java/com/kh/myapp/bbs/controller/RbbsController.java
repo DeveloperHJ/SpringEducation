@@ -39,7 +39,6 @@ public class RbbsController {
 	{
 		ResponseEntity<String> responseEntity = null;
 		
-		logger.info(rbbsdto.toString());
 		logger.info("write POST...");
 		
 		try {
@@ -158,6 +157,25 @@ public class RbbsController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			responseEntity = new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
+		}
+		
+		return responseEntity;
+	}
+
+	// ¸®´ñ´Þ±â
+	@RequestMapping(value="reReply", method=POST)
+	public ResponseEntity<String> reReply(@RequestBody RbbsDTO rbbsdto)
+	{
+		ResponseEntity<String> responseEntity = null;
+		
+		logger.info("reRply POST...");
+		
+		try {
+			rs.reReply(rbbsdto);
+			responseEntity = new ResponseEntity<>("Success", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			responseEntity = new ResponseEntity<>("Fail", HttpStatus.BAD_REQUEST);
 		}
 		
 		return responseEntity;
