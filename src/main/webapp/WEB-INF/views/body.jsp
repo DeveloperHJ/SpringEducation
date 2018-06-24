@@ -26,16 +26,19 @@
   <!-- The slideshow -->
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="https://www.w3schools.com/bootstrap4/la.jpg" alt="Los Angeles" width="1100" height="500">
+      <!-- <img src="https://www.w3schools.com/bootstrap4/la.jpg" alt="Los Angeles" width="1100" height="500"> -->
+      <img src="/images/image1.JPG" alt="Sky Bridge" />
     </div>
     <div class="carousel-item">
-      <img src="https://www.w3schools.com/bootstrap4/chicago.jpg" alt="Chicago" width="1100" height="500">
+      <!-- <img src="https://www.w3schools.com/bootstrap4/chicago.jpg" alt="Chicago" width="1100" height="500"> -->
+      <img src="/images/image2.JPG" alt="Mountain Lake" />
     </div>
     <div class="carousel-item">
-      <img src="https://www.w3schools.com/bootstrap4/ny.jpg" alt="New York" width="1100" height="500">
+      <!-- <img src="https://www.w3schools.com/bootstrap4/ny.jpg" alt="New York" width="1100" height="500"> -->
+      <img src="/images/image3.JPG" alt="High way" />
     </div>
   </div>
-  
+
   <!-- Left and right controls -->
   <a class="carousel-control-prev" href="#demo" data-slide="prev">
     <span class="carousel-control-prev-icon"></span>
