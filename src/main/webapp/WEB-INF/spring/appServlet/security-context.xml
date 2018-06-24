@@ -8,9 +8,9 @@
 	<!-- spring security적용에서 제외 시작-->	
 	<!-- 	<http pattern="/bbs/**" 			security="none"/>	 -->
 	<http pattern="/resources/**" security="none"/>
-	<http pattern="/images/**" 		security="none"/>
-	<http pattern="/css/**" 			security="none"/>
-	<http pattern="/js/**" 				security="none"/>
+	<http pattern="/images/**" 	  security="none"/>
+	<http pattern="/css/**" 	  security="none"/>
+	<http pattern="/js/**" 		  security="none"/>
 	<!-- spring security적용에서 제외 끝 -->
 	
 	
@@ -26,9 +26,11 @@
 		
 		<!-- access="isAuthenticated()"  인증된 사용자면접근 -->
 		<intercept-url pattern="/bbs/**" 		access="isAuthenticated()"/>		
-		<intercept-url pattern="/member/**" access="isAuthenticated()"/>
+		<intercept-url pattern="/member/memberModify/**" access="isAuthenticated()" />
 		<!-- 관리자만 접근 가능 -->
-		<intercept-url pattern="/admin/**"  access="hasAuthority('ROLE_ADMIN')"/>
+		<intercept-url pattern="/admin/**"  		 access="hasAuthority('ROLE_ADMIN')"/>
+		<intercept-url pattern="/member/memberList"  access="hasAuthority('ROLE_ADMIN')"/>
+		
 		<!-- access="permitAll" 모든 접근허용 -->  
 		<intercept-url pattern="/**" access="permitAll()"/>
 		

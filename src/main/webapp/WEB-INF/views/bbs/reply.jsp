@@ -296,8 +296,7 @@ function replyList(reReqPage) {
 					+ "</div>"
 					+ "</div>"
 					
-					+ "</div>"
-					+ "<br></br><br />";
+					+ "</div>";
 			});
 			$("#reply").html(str);
 			

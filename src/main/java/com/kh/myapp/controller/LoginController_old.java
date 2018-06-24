@@ -19,8 +19,8 @@ import com.kh.myapp.login.vo.LoginVO;
 import com.kh.myapp.member.vo.MemberVO;
 
 //@Controller
-@RequestMapping("/login")	// 클러스 내부에서 공통적으로 사용되는 Mapping
-@SessionAttributes("user")
+/*@RequestMapping("/login")	// 클러스 내부에서 공통적으로 사용되는 Mapping
+@SessionAttributes("user")*/
 public class LoginController_old {
 	
 	private static final Logger logger = LoggerFactory.getLogger(LoginController_old.class);

@@ -57,6 +57,7 @@ public class RbbsController {
 			@PathVariable Integer bnum, 
 			@PathVariable Integer reReqPage) 
 	{
+		logger.info("Rbbs List GET..." + RbbsController.this);
 		ResponseEntity<String> responseEntity = null;
 		RecordCriteria recordCriteria = new RecordCriteria(reReqPage, 10);
 		

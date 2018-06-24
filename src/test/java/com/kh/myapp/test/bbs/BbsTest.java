@@ -28,8 +28,8 @@ class BbsTest {
 	@Qualifier("bbsDAOImplXML")
 	BbsDAO bbsdao;
 	
-/*	@Test @Disabled
-	void insert_test() {
+	@Test @Disabled
+	void insert_test() throws Exception {
 		BbsDTO bbsdto = new BbsDTO();
 		bbsdto.setBTitle("mybatis Insert TEST");
 		bbsdto.setBName("김현정");
@@ -39,19 +39,19 @@ class BbsTest {
 	}
 
 	@Test @Disabled
-	void list_test() {
+	void list_test() throws Exception {
 		List<BbsDTO> list = bbsdao.list(null);
 		logger.info(list.size());
 	}
 	
 	@Test @Disabled
-	void view_test() {
+	void view_test() throws Exception {
 		BbsDTO bbsdto = bbsdao.view(3652);
 		logger.info(bbsdto.toString());
 	}
 	
 	@Test @Disabled
-	void update_test() {
+	void update_test() throws Exception {
 		BbsDTO bbsdto = new BbsDTO();
 		bbsdto.setBNum(3652);
 		bbsdto.setBContent("게시글 수정 테스트");
@@ -60,17 +60,17 @@ class BbsTest {
 	}
 	
 	@Test @Disabled
-	void delete_test() {
+	void delete_test() throws Exception {
 		bbsdao.delete(3651);
 	}
 	
 	@Test @Disabled
-	void replyView_test() {
+	void replyView_test() throws Exception {
 		logger.info(bbsdao.replyView(3650));
 	}
 	
 	@Test @Disabled
-	void reply_test() {
+	void reply_test() throws Exception {
 		BbsDTO bbsdto = new BbsDTO();
 		bbsdto.setBNum(3650);
 		bbsdto.setBName("김현정");
@@ -84,10 +84,10 @@ class BbsTest {
 	}
 	
 	@Test @Disabled
-	void totalRec_test() {
+	void totalRec_test() throws Exception {
 		logger.info(bbsdao.totalRec());
 	}
-	*/
+	
 	
 	@Test @Disabled
 	void findList_test() throws Exception{
@@ -107,7 +107,7 @@ class BbsTest {
 	}
 	
 	@Test @Disabled
-	void list_test() {
+	void list_test2() {
 		RecordCriteria recordCriteria = new RecordCriteria(1, 10);
 		PageCriteria pageCriteria;
 		try {
@@ -120,7 +120,7 @@ class BbsTest {
 		}
 	}
 	
-	@Test
+	@Test @Disabled
 	void reply_new() throws Exception {
 		BbsDTO bbsdto = new BbsDTO();
 		bbsdto.setBID("admin@kh.com");
@@ -132,5 +132,26 @@ class BbsTest {
 		bbsdto.setBIndent(0);
 		
 		bbsdao.reply(bbsdto);
+	}
+	
+	// 초기 게시글 입력
+	@Test @Disabled
+	void write_all() throws Exception {
+		BbsDTO bbsdto = new BbsDTO();
+		for (int i = 0; i<= 1000; i++) {
+			bbsdto.setBID("admin@kh.com");
+			bbsdto.setBName("관리자" + i);
+			bbsdto.setBTitle("관리자 글쓰기 테스트..." + i);
+			bbsdto.setBContent("글쓰기 내용 " + i);
+			
+			bbsdao.write(bbsdto);
+			
+			bbsdto.setBID("user@kh.com");
+			bbsdto.setBName("유저" + i);
+			bbsdto.setBTitle("유저 글쓰기 테스트..." + i);
+			bbsdto.setBContent("유저 글쓰기 내용 " + i);
+			
+			bbsdao.write(bbsdto);
+		}
 	}
 }

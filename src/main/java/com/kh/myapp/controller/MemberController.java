@@ -69,10 +69,10 @@ public class MemberController {
 	public String memberModifyOK(@Valid MemberVO memberVO, BindingResult result) 
 	{
 		if(result.hasErrors()) {
-			return "/member/memberModify";
+			return "/member/memberModify/"+memberVO.getId();
 		} else {
 			memberService.memberUpdate(memberVO);
-			return "/";
+			return "redirect:/";
 		}	
 	}
 	
@@ -92,7 +92,7 @@ public class MemberController {
 	@RequestMapping(value="/memberList")
 	public String memberList(Model model)
 	{
-		logger.info("memberList");
+		logger.info("memberList" + MemberController.this);
 		List<MemberVO> alist = memberService.getMemberAll();
 		model.addAttribute("memberVOS", alist);
 		return "/member/memberList";

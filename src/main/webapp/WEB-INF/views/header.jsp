@@ -7,8 +7,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<meta name="description" content="">
-<meta name="author" content="">
 
 <!-- JSON - SPRING SECURITY 적용 -->
 <meta name="_csrf" content="${_csrf.token}"/>
@@ -16,7 +14,6 @@
 <meta name="_csrf_header" content="${_csrf.headerName}"/>
 <!-- JSON - SPRING SECURITY 적용 끝 -->
 
-<link rel="icon" href=" ">
 <title>반갑습니다.</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
