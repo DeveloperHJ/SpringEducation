@@ -13,7 +13,7 @@ $(function(){
 		e.preventDefault();
 		if($("input[name=password]").val() != $("input[name=passwd]").val()) {
 			$("#passwordErr").text('비밀번호가 일치하지 않습니다.');
-			$(this).focus();비
+			$(this).focus();
 		} else {
 			$("#passwordErr").text('');
 		}

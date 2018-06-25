@@ -4,11 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/webjars/bootstrap/4.1.0/css/bootstrap.css">
 <script src="/webjars/bootstrap/4.1.0/js/bootstrap.js"></script>
-<script src="/webjars/jquery/3.3.1/dist/jquery.js"></script>
+<script src="/webjars/jquery/3.3.1/dist/jquery.js"></script> -->
 
 <title>Insert title here</title>
 
@@ -315,6 +315,8 @@ function replyList(reReqPage) {
 // 페이지 리스트 
 function showPageList(pageCriteria){
 	console.log(pageCriteria);
+	reReqPage = pageCriteria.recordCriteria.reqPage;
+	
 	var str = "";
 	
 	// 이전페이지

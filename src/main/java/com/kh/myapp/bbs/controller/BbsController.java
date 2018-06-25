@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -16,6 +17,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import com.kh.myapp.bbs.dto.BbsDTO;
 import com.kh.myapp.bbs.service.BbsService;
@@ -32,20 +34,21 @@ public class BbsController {
 	private BbsService bs;
 	
 	//게시글 작성 페이지
-	@RequestMapping(value="/write", method=GET)
-	public void writeGet(BbsDTO bbsdto, Model model) throws Exception 
+	@RequestMapping(value="/write")
+	public void writeGet(Model model) throws Exception 
 	{
 		logger.info("write GET...");
+		model.addAttribute("bbsdto", new BbsDTO());
 	}
 
 	//게시글 작성 로직
-	@RequestMapping(value="/write", method=POST)
-	public String writePost(BbsDTO bbsDTO) throws Exception 
+	@RequestMapping(value="/writeOK", method=POST)
+	public String writePost(@Valid BbsDTO bbsdto, BindingResult result) throws Exception 
 	{
-		logger.info("write POST...");
-		logger.info(bbsDTO.toString());
+		logger.info("write POST... ");
+		logger.info(bbsdto.toString());
 		
-		bs.write(bbsDTO);
+		bs.write(bbsdto);
 		
 		return "redirect:/bbs/list";	//글 등록 후 목록으로 이동 
 	}

@@ -33,8 +33,8 @@ public class MemberController {
 	
 	// 가입화면
 	@RequestMapping(value="/memberJoin") // 주소값
-	public void memJoin(Model model) {
-		logger.info("memberJoin...");
+	public void memJoin(Model model) throws Exception {
+		logger.info("memberJoin GET...");
 		model.addAttribute("memberVO", new MemberVO());
 	}
 	
@@ -48,11 +48,8 @@ public class MemberController {
 	@RequestMapping(value="/memberJoinOK", method=RequestMethod.POST)
 	public String memJoinOK(@Valid MemberVO memberVO, BindingResult result) 
 	{
-		if(result.hasErrors()) {
-			return "/member/memberJoin";
-		} else {
-			memberService.memberInsert(memberVO);
-		}	
+		memberService.memberInsert(memberVO);
+		
 		return "redirect:/";
 	}
 	
@@ -66,15 +63,15 @@ public class MemberController {
 	
 	//멤버 수정 처리 
 	@RequestMapping(value="/memberModifyOK")
-	public String memberModifyOK(@Valid MemberVO memberVO, BindingResult result) 
+	public String memberModifyOK(@Valid MemberVO memberVO, BindingResult result) throws Exception
 	{
 		if(result.hasErrors()) {
 			return "/member/memberModify";
 		} else {
 			memberService.memberUpdate(memberVO);
-			return "/";
-		}	
-	}
+		}
+		return "redirect:/";
+	}	
 	
 	//멤버 삭제 처리 
 	@RequestMapping(value="/memberDelete/{id:.+}")	// get 방식 대신 스프링에서 지원하는 방식 사용

@@ -5,11 +5,13 @@
 
 <sec:authentication var="user" property="principal" scope="session" />
 
-<div class="container-fluid">
-  <p>Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile-first projects on the web.</p>
-</div>
+<!-- <div class="col-lg-7 align-self-center text-lg-center text-center">
+  <h1 class="mb-0 mt-4 display-3">Spring Framework</h1>
+  <p class="mb-5 lead">Kim Hyeonjeong</p>
+</div> -->
 
-<nav class="navbar navbar-expand-sm bg-white navbar-light sticky-top">
+<div class="container">
+<nav class="navbar navbar-expand-sm bg-white navbar-light sticky-top" style="padding:3%;">
   <!-- Brand -->
   <a class="navbar-brand" href="/">SPRING</a>
 
@@ -20,7 +22,7 @@
 
   <!-- Navbar links -->
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <ul class="navbar-nav">
+    <ul class="navbar-nav justify-content-center">
 		<li class="nav-item"><a href="/bbs/list" class="nav-link">게시판</a></li>
 		<sec:authorize access="isAnonymous()">
 			<li class="nav-item" id="loginOn"><a href="/login/login" class="nav-link">로그인</a></li>
@@ -34,12 +36,8 @@
 		</sec:authorize>
     </ul>
   </div> 
-  <form class="form-inline" action="/action_page.php">
-  <input class="form-control mr-sm-2" type="text" placeholder="Search">
-  <button class="btn btn-success" type="submit">Search</button>
-  </form>
-  
 </nav>
+</div>
 
  
 

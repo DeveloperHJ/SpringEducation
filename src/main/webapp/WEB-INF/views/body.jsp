@@ -8,7 +8,6 @@
   /* Make the image fully responsive */
   .carousel-inner img {
       width: 100%;
-      height: 100%;
   }
   </style>
   
@@ -26,13 +25,13 @@
   <!-- The slideshow -->
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="https://www.w3schools.com/bootstrap4/la.jpg" alt="Los Angeles" width="1100" height="500">
+      <img src="/images/image1.JPG" alt="" />
     </div>
     <div class="carousel-item">
-      <img src="https://www.w3schools.com/bootstrap4/chicago.jpg" alt="Chicago" width="1100" height="500">
+      <img src="/images/image2.JPG" alt="" />
     </div>
     <div class="carousel-item">
-      <img src="https://www.w3schools.com/bootstrap4/ny.jpg" alt="New York" width="1100" height="500">
+      <img src="/images/image3.JPG" alt="" />
     </div>
   </div>
   

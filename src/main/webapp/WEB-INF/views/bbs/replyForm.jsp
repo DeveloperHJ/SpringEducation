@@ -36,7 +36,7 @@ th { width: 100px }
   <input type="hidden" name="bNum" value="${reply.BNum}" />
   <input type="hidden" name="bGroup" value="${reply.BGroup}" />
   <input type="hidden" name="bStep" value="${reply.BStep}" />
-  <input type="hidden" name="bIntent" value="${reply.BIndent}" />
+  <input type="hidden" name="bIndent" value="${reply.BIndent}" />
   <input type="hidden" name="bID" value="${user.username}" />
   <%-- <input type="hidden" name="reqPage" value="${recordCriteria.reqPage}"/> --%>
   

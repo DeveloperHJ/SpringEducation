@@ -3,6 +3,7 @@ package com.kh.myapp.bbs.dto;
 import java.sql.Date;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,13 +18,19 @@ public class BbsDTO {
 	
 	@NotNull
 	private int bNum;					// 게시글 번호
+	
+	@Size(min=1, max=50, message="제목이 너무 짧거나 깁니다.")
 	private String bTitle;		// 제목
+	
 	private String bID;				// 작성자 ID
 	private String bName;			// 작성자 이름
 	private Date bCDate; 			// 작성일시 
 	private Date bUDate; 			// 수정일시 
 	private int bHit; 				// 조회수 
+	
+	@Size(min=1, max=200, message="내용이 너무 짧거나 깁니다.")
 	private String bContent;	// 글내용
+	
 	private int bGroup; 			// 답글 그룹
 	private int bStep; 		// 답변글의 단계 
 	private int bIndent; 	// 답변글 들여쓰기 

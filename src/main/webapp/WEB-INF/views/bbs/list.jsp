@@ -19,6 +19,37 @@ th, #tdnum, #tdname, #tdhit, #tdcdate { text-align: center }
 #name  { width: 20% }
 #hit { width: 10% }
 #cdate {width: 10% }
+
+   
+.page-link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #000000;   /* 선택 안된 숫자 색상 */
+  background-color: #FFFFFF; /* 선택 안된 버튼 색상 */
+  border: 1px solid #E9ECEF; /* 선택 안된 버튼 테두리 */
+}
+.page-item.disabled .page-link {
+  color: #FF0000;
+  pointer-events: none;
+  cursor: auto;
+  background-color: #CEFFCE;
+  border-color: #718393;
+}
+.page-item.active .page-link {
+  z-index: 1;
+  color: #000000;/* 선택된 버튼 폰트 색상 */
+  background-color: #E9ECEF;/* 선택된 버튼 색상 */
+  border-color: #E9ECEF;/* 선택된 버튼 테두리 */
+}
+.page-link:focus, .page-link:hover {
+  color: #000000;/* 마우스 올라갔을때 폰트 색상 */
+  text-decoration: none;
+  background-color: #E9ECEF;
+  border-color: #E9ECEF;
+}
 </style>
 
 </head>
@@ -27,32 +58,36 @@ th, #tdnum, #tdname, #tdhit, #tdcdate { text-align: center }
 <jsp:include page="../navbar.jsp" />
 
 <div class="container">
-  <h2>Basic Table</h2>
-  <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>
-  <br>
+  <!-- <h2>Basic Table</h2> -->
+	
+  <div class="row justify-content-sm-end">
+
+  </div>
+  	<br>
 
   <form action="/bbs/list">
-	  <select class="custom-select my-1 mr-sm-2" name="searchType">
+ <!--  <div class="row justify-content-sm-end"> -->
+ <div class="row">
+	  <select class="custom-select col-sm-2" name="searchType">
 	    <option value="TC" <C:out value="${findCriteria.searchType eq 'TC' ? 'selected' : '' }" />>제목+내용</option>
 	    <option value="T" <C:out value="${findCriteria.searchType eq 'T' ? 'selected' : '' }" />>제목</option>
 	    <option value="C" <C:out value="${findCriteria.searchType eq 'C' ? 'selected' : '' }" />>내용</option>
 	    <option value="W" <C:out value="${findCriteria.searchType eq 'W' ? 'selected' : '' }" />>작성자</option>
 	  </select>
 	
-	  <input class="form-control mr-sm-2" name="keyword" type="search" aria-label="Search" placeholder="검색 내용 입력" value="${findCriteria.keyword}">
-	  <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" id="search">Search</button>
-  </form>
+	  <input class="form-control col-sm-3" name="keyword" type="search" aria-label="Search" placeholder="검색 내용 입력" value="${findCriteria.keyword}">
+	  <button class="btn btn-sm btn-outline-dark my-2 my-sm-0" type="submit" id="search">Search</button>
+	  
+	  <a href="/bbs/list" class="btn btn-sm btn-outline-info ml-auto" role="button" aria-pressed="true">목록 </a>
+  	  <a href="/bbs/write" class="btn btn-sm btn-outline-info" role="button" aria-pressed="true" id="write">글쓰기</a>
+  </div>
+ </form>
 
-	
-  <p style="text-align: right">
-  <a href="/bbs/list" class="btn btn-primary btn active" role="button" aria-pressed="true">목록 </a>
-  <a href="/bbs/write" class="btn btn-primary btn active" 
-     role="button" aria-pressed="true" id="write">글쓰기</a>
-  <br></p>
-  
+	<br>
+
   <table class="table table-hover">
   
-      <thead class="thead-dark">
+      <thead>
       <tr>
         <th id = "num">#</th>
         <th id = "title">제목</th>

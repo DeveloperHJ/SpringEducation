@@ -52,12 +52,12 @@ $(function(){
        		<h2>Account Information</h2>
            	<div class="form-group">
                 <label>Name</label>
-                <form:input path="name" readonly="true" class="form-control" />
+                <form:input path="name" class="form-control" />
 		  		<form:errors path="name" cssClass="errmsg" />	
             </div>
             <div class="form-group">
                 <label>ID</label>
-              	<form:input path="id" class="form-control" />
+              	<form:input path="id" class="form-control" readonly="true" />
 				<form:errors path="id" cssClass="errmsg" />
 			</div>
             <div class="form-group">
