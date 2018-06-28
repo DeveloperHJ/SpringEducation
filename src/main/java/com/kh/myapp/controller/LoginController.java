@@ -44,7 +44,7 @@ public class LoginController {
 	public String securityLogIn(Model model)
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		logger.info("인증" + auth.getPrincipal().toString());
+		logger.info("인증 : " + auth.getPrincipal().toString());
 		
 		// 익명의 유저가 아닐 경우 home으로 이동 (=로그인 했을 경우)
 		if(!auth.getPrincipal().equals("anonymousUser")) {

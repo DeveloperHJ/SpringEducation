@@ -35,5 +35,10 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jre1.8.0_171/lib/ext/commons-collections4-4.1.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jre1.8.0_171/lib/ext/commons-dbcp2-2.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jre1.8.0_171/lib/ext/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jre1.8.0_171/lib/ext/commons-pool2-2.5.0.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jre1.8.0_171/lib/ext/ojdbc6.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

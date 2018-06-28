@@ -28,7 +28,7 @@ import com.kh.myapp.bbs.service.BbsService;
 public class BbsController {
 
 	private static final Logger logger = LoggerFactory.getLogger(BbsController.class);
-	
+
 	@Autowired
 	@Qualifier("bbsServiceImplXML")
 	private BbsService bs;
@@ -57,8 +57,6 @@ public class BbsController {
 	@RequestMapping(value = "/list", method = GET)
 	public void list(HttpServletRequest request, Model model) throws Exception 
 	{
-		logger.info("list GET..");
-		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		logger.info("인증정보 : " + auth.getPrincipal().toString());
 		

@@ -66,12 +66,18 @@ public class MemberController {
 	public String memberModifyOK(@Valid MemberVO memberVO, BindingResult result) throws Exception
 	{
 		if(result.hasErrors()) {
-			return "/member/memberModify";
+			return "/member/memberModify/"+memberVO.getId();
 		} else {
 			memberService.memberUpdate(memberVO);
+<<<<<<< HEAD
 		}
 		return "redirect:/";
 	}	
+=======
+			return "redirect:/";
+		}	
+	}
+>>>>>>> refs/remotes/origin/master
 	
 	//멤버 삭제 처리 
 	@RequestMapping(value="/memberDelete/{id:.+}")	// get 방식 대신 스프링에서 지원하는 방식 사용
@@ -89,7 +95,7 @@ public class MemberController {
 	@RequestMapping(value="/memberList")
 	public String memberList(Model model)
 	{
-		logger.info("memberList");
+		logger.info("memberList" + MemberController.this);
 		List<MemberVO> alist = memberService.getMemberAll();
 		model.addAttribute("memberVOS", alist);
 		return "/member/memberList";

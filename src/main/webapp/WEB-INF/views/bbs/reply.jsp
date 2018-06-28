@@ -299,8 +299,13 @@ function replyList(reReqPage) {
 					+ "</div>"
 					+ "</div>"
 					+ "</div>"
+<<<<<<< HEAD
 					+ "</div>"
 					+ "<hr />";
+=======
+					
+					+ "</div>";
+>>>>>>> refs/remotes/origin/master
 			});
 			
 			$("#reply").html(str);

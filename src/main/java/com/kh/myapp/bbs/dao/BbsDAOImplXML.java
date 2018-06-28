@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.myapp.bbs.dto.BbsDTO;
-import com.kh.myapp.member.dao.MemberDAO;
 import com.kh.myapp.util.FindCriteria;
-import com.kh.myapp.util.PageCriteria;
 import com.kh.myapp.util.RecordCriteria;
 
 @Repository
