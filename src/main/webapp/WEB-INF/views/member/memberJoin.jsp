@@ -85,8 +85,8 @@ $(function(){
 			</div>
             <div class="form-group">
                   <label>phone</label>
-                  <form:input path="name" class="form-control" placeholder="Your phone, please"/>
-				  <form:errors path="name" cssClass="errmsg" />
+                  <form:input path="phone" class="form-control" placeholder="Your phone, please"/>
+				  <form:errors path="phone" cssClass="errmsg" />
 			</div>
             <div class="form-group">
                   <label>gender</label><br>

@@ -13,7 +13,7 @@
 <title>Insert title here</title>
 
 <style>
-body { padding: 1px; }
+ /* #replyPage {background-color : #C4E1E2;}  */
 </style>
 
 <script>
@@ -32,7 +32,7 @@ var bnum = ${view.BNum};
 var reReqPage = 1;
 
 // 세션 정보 
- var login_id = "${user.username}";
+var login_id = "${user.username}";
 var login_name = "${user.name}"; 
 /* 
 var login_id = "admin@kh.com";
@@ -139,7 +139,8 @@ $(function() {
 	$("#reply").on("click", "#reModifyBtn", function() {
 		var li = $(this).parent().parent();
 		
- 		$("#reModiDiv", li).slideToggle("slow");
+		$("#reViewDiv", li).toggle();
+ 		$("#reModiDiv", li).toggle();
 	});
 	
 	// 댓글 수정
@@ -174,31 +175,33 @@ $(function() {
 	
 	// 댓글 삭제
 	$("#reply").on("click", "#reDeleteBtn", function() {
-		var li = $(this).parent().parent();
- 		var rnum = li.attr("data-rnum");
-		
-		$.ajax({
-			type:"DELETE",
-			url:"/rbbs/delete/"+rnum,
-			headers:{
-				"Content-Type" : "application/json",
-				"X-HTTP-Method-Override" : "POST"
-			},
-			dataType: "text",
-
-			success:function(result){
-				replyList(reReqPage);
-			},
-			error:function(e){
-				console.log("실패" + e)
-			}
-		});
+		msg = "정말 삭제하시겠습니까?"; 
+		if(confirm(msg)!=0) {
+			var li = $(this).parent().parent();
+	 		var rnum = li.attr("data-rnum");
+			
+			$.ajax({
+				type:"DELETE",
+				url:"/rbbs/delete/"+rnum,
+				headers:{
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "POST"
+				},
+				dataType: "text",
+	
+				success:function(result){
+					replyList(reReqPage);
+				},
+				error:function(e){
+					console.log("실패" + e)
+				}
+			});
+		}
 	});
 	
 	// 댓글 작성 클릭 시 수행 로직 
 	$("#replyBtn").click(function() {
 		var replyContent = $("#replyContent").val();
-		alert("등록클릭" + replyContent);
 		
 		$.ajax
 		({
@@ -252,41 +255,42 @@ function replyList(reReqPage) {
 
 				str += "<div data-rnum='"+rec.rnum+"'>";
 			for(var i=0; i < rec.rindent; i++) {
-				str += "&nbsp;&nbsp;";
+				/* str += "&nbsp;&nbsp;"; */
 			}	 			
+			
 			if(rec.rindent > 0){
 				str +=	"<img alt='' src='/images/icon_reply.gif'>";
 			}	
-				str += "<label id='nameLb' for='content'><b>"+ rec.rname +"</b></label>&nbsp"
+			
+				str += "<label id='nameLb' for='content'><b>" + rec.rname + "</b></label>&nbsp"
 					+ "<label id='cdateLb' for='content'>&nbsp"+ rec.rcdate +"</label>&nbsp"
+					+ "<div aria-label='Basic example' id='reViewMode' style='float: right; padding:1px;'>";
 					
-					+ "<div style='float: right;'>"
+			if(login_id == rec.rid) {
+				str	+= "<button id='reModifyBtn' class='btn btn-outline-dark btn-sm'>수정</button>&nbsp"
+					+ "<button id='reDeleteBtn' class='btn btn-outline-dark btn-sm'>삭제</button>&nbsp";
+				
+			}
+				str	+= "<button id='reReplyBtn' class='btn btn-outline-primary btn-sm'>답댓글</button>&nbsp"
 					+ "<button id='goodBtn' class='btn btn-outline-danger btn-sm'>Good&nbsp"
 					+ "<span class='badge badge-danger badge-pill'>"+ rec.rgood +"</span></button>&nbsp"
 					+ "<button id='badBtn' class='btn btn-outline-warning btn-sm'>Bad&nbsp"
 					+ "<span class='badge badge-warning badge-pill'>"+ rec.rbad +"</span></button>&nbsp"
-					+ "</div>"
-					+ "<li id='reContent' style='list-style: none;'>";
-					
-			for(var i=0; i < rec.rindent; i++) {
-				str += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-			}
-				str += rec.rcontent +"</li>"
-					+ "<div aria-label='Basic example' id='reViewMode' style='float: right; padding:1px;'>"
-					+ "<button id='reReplyBtn' class='btn btn-outline-primary btn-sm'>답댓글</button>&nbsp"
-					+ "<button id='reModifyBtn' class='btn btn-outline-secondary btn-sm'>수정</button>&nbsp"
-					+ "<button id='reDeleteBtn' class='btn btn-outline-secondary btn-sm'>삭제</button>"
-					+ "</div><br></br>"
-					
-					+ "<div id='reModiDiv' class='row' style='padding: 1px; display:none;'>"
-					+ "<div class='col'>"
+					+ "</div><br>"
+					+ "<li id='reContent' style='list-style: none;'>"
+					+ "<div id='reViewDiv' class='row'>";
+			for(var j=0; j < rec.rindent; j++) {
+				 str += "&nbsp;&nbsp;"; 
+			} 
+				str += "&nbsp;&nbsp;&nbsp;" + rec.rcontent + "</div><br>" 
+					+ "<div id='reModiDiv' class='row' style='padding: 2px; display:none;'>" 
 					+ "<textarea id='reModiContent' cols='50' rows='3' class='form-control'>" + rec.rcontent + "</textarea>"
 					+ "<div style='float: right'>"
 					+ "<button id='reModiOkBtn' class='btn btn-success btn-sm'>완료</button><br />"
 					+ "</div>"
 					+ "</div>"
-					+ "</div>"
-					
+					+ "</li>"
+
 					+ "<div id='reReplyDiv' class='row' style='padding: 1px; display:none;'>"
 					+ "<div class='col'>"
 					+ "<textarea id='reReplyContent' cols='50' rows='3' class='form-control' placeholder='답댓글 내용을 입력해주세요.'></textarea>"
@@ -295,10 +299,10 @@ function replyList(reReqPage) {
 					+ "</div>"
 					+ "</div>"
 					+ "</div>"
-					
 					+ "</div>"
-					+ "<br></br><br />";
+					+ "<hr />";
 			});
+			
 			$("#reply").html(str);
 			
 			console.log(data.item);
@@ -342,28 +346,34 @@ function showPageList(pageCriteria){
 <body>
 
 <%-- view reqPage : ${view.reqPage } --%>
- <div class="container">
-  <div class="row" style="padding: 1px">
+<div id="replyPage" class="container">
+   <div class="table-responsive-sm">
+      <table class="table table-sm">
+         <tr class="table-table">
+            <td class="align-middle" style='width: 80px; text-align: center'>${user.name }
+            </td>
+            <td><textarea class="form-control" id="replyContent"
+                 		  placeholder="댓글을 입력해주세요." cols="120" rows="3"></textarea></td>
+            <td class="align-middle"><button style=height:70px id="replyBtn" class="btn btn-outline-info btn active">댓글작성</button></td>
+         </tr>
+      </table>
+   </div>
+<%--   <div class="row" style="padding: 1px">
   	<div class="col">
-      <textarea id="replyContent" cols="50" rows="1" class="form-control" placeholder="댓글 내용을 입력해주세요."></textarea>
-  	  <br />
+      ${user.name} <textarea id="replyContent" cols="120" rows="3" class="form-control" placeholder="댓글 내용을 입력해주세요."></textarea>
+  	  <button id="replyBtn" class="btn btn-primary btn active">댓글 등록</button>
   	</div>
-  </div>
-  <div class="row" style="text-align: center">
-  	<div class="col">
-      <button id="replyBtn" class="btn btn-primary btn active">댓글 등록</button>
-    </div>
-  </div>
-<br></br>
-
-<h4>댓글리스트</h4>
-
+  </div> --%>
+<hr /><br><br>
+<!-- 댓글 리스트 -->
+<h4 align="center">댓글리스트</h4>
 <ul class="list-group" id = "reply">
 
 </ul>
 
-
 <br />
+
+<!-- 페이징 -->
 <nav aria-label="Page navigation example">
 <ul class="pagination justify-content-center" id="pageNumList">
 	

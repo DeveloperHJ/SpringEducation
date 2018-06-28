@@ -11,6 +11,8 @@
 <head>
 <title>글쓰기</title>
 
+<jsp:include page="../header.jsp" />
+
 <style>
 div.table { width: 100% }
 th { width: 100px }
@@ -18,7 +20,22 @@ th { width: 100px }
 
 </style>
 
-<jsp:include page="../header.jsp" />
+<script>
+$(function() {
+	$("#writeBtn").click(function() {
+		if($("#bTitle").val() =="") {
+			alert("제목을 입력해주세요!");
+			$("#bTitle").focus();
+			return false;
+		} else if($("#bContent").val() =="") {
+			alert("내용을 입력해주세요!");
+			$("#bContent").focus();
+			return false;
+		}
+		$("form").submit();
+	});
+});
+</script>
 
 </head>
 <body>
@@ -31,17 +48,17 @@ th { width: 100px }
   	<input type="hidden" name="bID" value="${user.username}" />	<!-- 글쓴 뒤 페이지 유지 -->
   			<div class="form-group">
                   <label>작성자</label>
-                  <input class="form-control" name="bName" placeholder="이름을 입력하세요." 
+                  <input class="form-control" id="bName" name="bName" placeholder="이름을 입력하세요." 
 						   		value="${user.name}" readOnly="readOnly" />
             </div>
             <div class="form-group">
                   <label>제목</label>
-                  <input class="form-control" name="bTitle" placeholder="제목을 입력하세요." />
+                  <input class="form-control" id="bTitle" name="bTitle" placeholder="제목을 입력하세요." />
 				  <form:errors path="bTitle" cssClass="errmsg" />
 			</div>
             <div class="form-group">
                   <label>내용</label>
-                  <textarea class="form-control" name="bContent" placeholder="내용을 입력하세요." rows="5"></textarea>
+                  <textarea class="form-control" id="bContent" name="bContent" placeholder="내용을 입력하세요." rows="5"></textarea>
 				  <form:errors path="bContent" cssClass="errmsg" />
 			</div>
   		<%-- <table class="table table-hover">
@@ -63,7 +80,7 @@ th { width: 100px }
 		</table> --%>
 		
 		<div style="text-align: right">
-		<input class="btn btn-primary" type="submit" value="등록">
+		<input id="writeBtn" class="btn btn-primary" type="button" value="등록">
 		<a href="/bbs/list" class="btn btn-secondary" role="button" aria-pressed="true">취소</a>
 		</div>
 	</form:form>

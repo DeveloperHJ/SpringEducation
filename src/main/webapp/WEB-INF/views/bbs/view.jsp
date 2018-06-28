@@ -14,6 +14,7 @@
 <title>Insert title here</title>
 <style>
 th { width: 100px }
+#divPage {background-color: #C4E1E2;}
 </style>
 
 <script>
@@ -36,8 +37,11 @@ th { width: 100px }
 				location.href="/bbs/delete?reqPage=${param.reqPage}&bnum=${view.BNum}";
 			} 
 		});
+		
+	 	$("#replyViewBtn").click(function() {
+	 		$("#replyViewPage").toggle();
+	 	});
 	}); 
-
 </script>
 
 </head>
@@ -49,63 +53,74 @@ th { width: 100px }
 <%--   <input type="hidden" name="reqPage" value="${recordCriteria.reqPage}"/> --%>
 
   <div id='viewMode'>
-  <div class="float-right">
-  <a href="/bbs/list?reqPage=${param.reqPage}" class="btn btn-primary btn active btn-sm" role="button" aria-pressed="true">목록</a>
-  <C:if test="${user.username eq view.BID}">
-	  <button id="modify" type="button" class="btn btn-primary btn-sm">수정</button>
-	  <button id="delete" type="button" class="btn btn-primary btn-sm">삭제</button>
-  </C:if>
-  </div>
-	<div class="row">
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-header"><h3> ${view.BTitle} </h3> ${view.BName} <span style="text-align:right">${view.BCDate}</span></div>
-			<div class="card-body">
-				<!-- <h4>Card title</h4>
-              <h6 class="text-muted" >Subtitle</h6> -->
-				<p>${view.BContent}</p>
-      	</div>
-   	  </div>
-  	 </div>
-  </div>
+	  <div class="float-right">
+		  <a href="/bbs/replyForm?reqPage=${param.reqPage}&bnum=${view.BNum}" class="btn btn-dark btn-sm">답글</a>
+		  <a href="/bbs/list?reqPage=${param.reqPage}" class="btn btn-dark btn active btn-sm" role="button" aria-pressed="true">목록</a>
+		  <C:if test="${user.username eq view.BID}">
+			  <button id="modify" type="button" class="btn btn-outline-dark btn-sm">수정</button>
+			  <button id="delete" type="button" class="btn btn-outline-dark btn-sm">삭제</button>
+		  </C:if>
+	  </div>
+  
+	  <br><br>
+	  
+		<div class="row">
+	      <div class="col-md-12">
+	        <div class="card">
+	          <div class="card-header"><h3> ${view.BTitle} </h3> ${view.BName} <span style="text-align:right">${view.BCDate}</span></div>
+				<div class="card-body">
+					<!-- <h4>Card title</h4>
+	              <h6 class="text-muted" >Subtitle</h6> -->
+					<p>${view.BContent}</p>
+					
+					<br></br><hr />
+					<button id="replyViewBtn" class="btn btn-outline-info btn-sm" type="button">댓글</button>
+	      		</div>
+	   	    </div>
+	  	 </div>
+	  </div>
+	  
   </div>
   
   <div id='modifyMode' style="display: none;">
-	<div class="row">
 	  <input type="hidden" name="bNum" value="${view.BNum}" />
 	  <input type="hidden" name="bGroup" value="${view.BGroup}" />
 	  <input type="hidden" name="bStep" value="${view.BStep}" />
 	  <input type="hidden" name="bIndent" value="${view.BIndent}" />
 	  
-	  <div class="col float-right">
-		  <input id="submit" class="btn btn-primary btn-sm" type="submit" value="완료">
+	  <div class="float-right">
+	  	  <C:if test="${user.username eq view.BID}">
+		  <input id="submit" class="btn btn-dark btn-sm" type="submit" value="완료">
 		  <button id="cancel" type="button" class="btn btn-secondary btn-sm">취소</button>
+		  </C:if>
 	      <a href="/bbs/list?reqPage=${param.reqPage}" class="btn btn-primary btn active btn-sm" role="button" aria-pressed="true">목록</a>
       </div>
 
+	  <br><br>
+
+	<div class="row">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <input id="write" type="text" readonly="readonly" class="form-control" name="bTitle" value="${view.BTitle}"></div>
+            <input id="write" type="text" readonly="readonly" class="form-control" name="bTitle" value="${view.BTitle}">
+            ${view.BName} <span style="text-align:right">${view.BCDate}</span></div>
 			<div class="card-body">
 				<!-- <h4>Card title</h4>
               <h6 class="text-muted" >Subtitle</h6> -->
 			<input id="write" type="text" readonly="readonly" class="form-control" name="bContent" value="${view.BContent}">
-      	</div>
-   	  </div>
+      		</div>
+   	   </div>
   	 </div>
+   </div>
   </div>
-  </div>
-  
-  
-
-	<p style="text-align: right"><a href="/bbs/replyForm?reqPage=${param.reqPage}&bnum=${view.BNum}" class="btn btn-primary btn-sm">답글</a></p>
-  	</form>
-  	
-  	<!-- 댓글 페이지 -->
-	<jsp:include page="reply.jsp" />
+</form>
 </div>
 
+<br></br>
 
+<!-- 댓글 페이지 -->
+<div id="replyViewPage" style="display: none;">
+<jsp:include page="reply.jsp" />
+</div>
 </body>
 </html>

@@ -11,15 +11,25 @@
 <title>Insert title here</title>
 <script>
 $(function() {		// = JQuery(function() {
-	$("form").submit(function() {
-		if($("#inputName").val() == "") {
+	$("#replyBtn").click(function() {
+		if($("#replyName").val() == "") {
 			alert("작성자 이름을 입력해주세요!");
-			$("#inputName").focus();
+			$("#replyName").focus();
 			return false;
 		} 
+		if($("#replybTitle").val() =="") {
+			alert("제목을 입력해주세요!");
+			$("#replybTitle").focus();
+			return false;
+		} else if($("#replybCon").val() =="") {
+			alert("내용을 입력해주세요!");
+			$("#replybCon").focus();
+			return false;
+		}
 	});
 });
 </script>
+
 <style>
 th { width: 100px }
 </style>
@@ -32,7 +42,6 @@ th { width: 100px }
   <br></br>
   <form method="post" action="/bbs/reply">
   <sec:csrfInput />
-  넘${reply.BNum} 그룹${reply.BGroup} 스텝${reply.BStep} 인덴트${reply.BIndent} 
   <input type="hidden" name="bNum" value="${reply.BNum}" />
   <input type="hidden" name="bGroup" value="${reply.BGroup}" />
   <input type="hidden" name="bStep" value="${reply.BStep}" />
@@ -46,19 +55,19 @@ th { width: 100px }
  	<table class="table table-hover">
 		<tr>
 			<th class="th-dark" scope="col">작성자</th>
-			<td><input id="inputName" type="text" class="form-control" name="bName" placeholder="이름을 입력하세요." value="${user.name}" readonly="readonly"></td>
+			<td><input id="replyName" type="text" class="form-control" name="bName" placeholder="이름을 입력하세요." value="${user.name}" readonly="readonly"></td>
 		</tr>
 		<tr>
 			<th class="th-dark" scope="col">제목</th>
-			<td><input id="write" type="text" class="form-control" name="bTitle"></td>
+			<td><input id="replybTitle" type="text" class="form-control" name="bTitle"></td>
 		</tr>
 		<tr>
 			<th class="th-dark" scope="col">내용</th>
-			<td><textarea class="form-control" name="bContent" rows="5"></textarea></td>
+			<td><textarea id="replybCon" class="form-control" name="bContent" rows="5"></textarea></td>
 		</tr>
 	</table> 
 	<div style="text-align: right">
-	<input class="btn btn-primary" type="submit" value="답글 등록">
+	<input id="replyBtn" class="btn btn-primary" type="submit" value="답글 등록">
 	<a href="/bbs/list?reqPage=${param.reqPage}" class="btn btn-secondary" role="button" aria-pressed="true">취소</a>
 	</div>
   	</form>

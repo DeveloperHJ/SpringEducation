@@ -19,28 +19,33 @@ $(function() {
 <jsp:include page="../navbar.jsp" flush="true"></jsp:include>
 <div class="container" style="margin-top: 3%;">
 회원목록
-<ul class="collapsible">
-<C:forEach items="${memberVOS}" var="memberVO">
-  <li>
-    <div class="collapsible-header">
-    	<i class="material-icons" style="position: relative;">filter_drama</i>${memberVO.id}
-    	&emsp;&emsp;
- 		<a href=# id="modi" data-url="/member/memberModify/${memberVO.id}">수정</a>
-		<a href=# id="del" data-url="/member/memberDelete/${memberVO.id}">삭제</a>
-	</div>
-    <div class="collapsible-body">
-    	<span>
-			이름: ${memberVO.name } <br>
-			생년월일: ${memberVO.birth } <br>
-			전화번호: ${memberVO.phone } <br>
-			성별: 
-			<C:if test="${memberVO.gender eq 'W'}">여자</C:if>
-			<C:if test="${memberVO.gender eq 'M'}">남자</C:if> 
-    	</span>
-   	</div>
-  </li>
-</C:forEach>
-</ul>
+<table border=1>
+	<tr>
+		<th>#</th>
+		<th>아이디</th>
+		<th>이름</th>
+		<th>생년월일</th>
+		<th>전화번호</th>
+		<th>성별</th>
+		<th>수정</th>
+		<th>삭제</th>
+	</tr>
+	<C:forEach items="${memberVOS}" var="memberVO">
+	<tr>
+		<td>#</td>
+		<td>${memberVO.id }</td>
+		<td>${memberVO.name }</td>
+		<td>${memberVO.birth }</td>
+		<td>${memberVO.phone }</td>
+		<td>
+			<C:if test="${memberVO.gender eq 'W'}"> 여자 </C:if>
+			<C:if test="${memberVO.gender eq 'M'}"> 남자 </C:if>
+		</td>
+		<td><button id="modi" data-url="/member/memberModify/${memberVO.id}">수정</button></td>
+		<td><button id="del" data-url="/member/memberDelete/${memberVO.id}">삭제</button></td>
+	</tr>
+	</C:forEach>
+</table>
 </div>
 </body>
 </html>
